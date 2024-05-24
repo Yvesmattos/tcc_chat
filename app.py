@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from ia import get_resposta
 
 app = Flask(__name__)
 
@@ -23,9 +24,9 @@ def get_item(item_id):
 @app.route('/send_question', methods=['POST'])
 def create_item():
     new_item = request.get_json()
-    new_item["id"] = len(items) + 1
-    items.append(new_item)
-    return jsonify(new_item), 201
+    # new_item["id"] = len(items) + 1
+    # items.append(new_item)
+    return jsonify(get_resposta(new_item["pergunta"])), 201
 
 # @app.route('/items/<int:item_id>', methods=['PUT'])
 # def update_item(item_id):
