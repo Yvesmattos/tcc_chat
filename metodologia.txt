@@ -1,0 +1,15 @@
+20240525 
+    Caio
+        22:25 Feitas as alterações para conseguir rodar o metodo do jaccard e a nlp bert de forma separada.
+        23:15 Consegui testar e finalizar a segregação das engines, cheguei a conclusão que o jaccard consegue uma resposta quase que instantaneamente enquanto o nlp leva em torno de 20 segundos.
+        23:21 Testado varias vezes a mesma pergunta, em jaccard todas as vezes retorna a mesma probabilidade de resposta certa.
+        23:23 Testado varias vezes a mesma pergunta, em bert todas as vezes retorna a mesma probabilidade de resposta certa, e menos que seja feito um treinamento novo.
+        23:25 Reparei que 0.3 ou 30% de assertividade no jaccard estava baixo demais, portanto aumentei para 60%/0.6, que de acordo com a biblioteca é o padrão aceitavel, precisa rever a assertividade do bert, são feitos calculos diferentes, esta 0.3 e o resultado sempre é maior que 1
+        23:43 O objetivo atual é estudar a criação de um model pra tentar reduzir o tempo de processamento do bert, um model próprio aumentaria também a taxa de acerto.
+        00:43 Finalmente, consegui dar o fine-tuning em um model com o princípio de ser mais acertivo, porem percebi que treinei ele em QA, precisava ser de NSP(next sentence prediction).
+        00:48 Consegui começar o treinamento no NSP. 
+        00:51 Com dois models conseguiremos saber se treinar realmente tem algum efeito, tendo efeito, precisaremos reescrever a mesma pergunta de varias formas diferentes.
+        01:17 Não consegui de forma alguma fazer o bert_engine funcionar com o model fine-tunado.
+
+
+        

@@ -1,84 +1,44 @@
-def get_resposta(pergunta_usuario):
-    import json
-    from transformers import BertTokenizer, BertForNextSentencePrediction
-    import torch
-    from difflib import SequenceMatcher
-    import re
-    from sklearn.feature_extraction.text import TfidfVectorizer
-    from sklearn.metrics.pairwise import cosine_similarity
+import json
 
-    # Carregar o modelo BERT pré-treinado e o tokenizador
-    model_name = 'bert-base-uncased'
-    tokenizer = BertTokenizer.from_pretrained(model_name)
-    model = BertForNextSentencePrediction.from_pretrained(model_name)
+class ResponseEngine:
+    def __init__(self):
+        self.bert_engine = None
+        self.jaccard_engine = None
 
-    # FAQ - Atendimento ao Cliente
-    with open("data.json", 'r', encoding='utf-8') as f:
-        # lendo e desserializando o conteudo do arquivo
-        faq = json.load(f)
-    
-    # Função para encontrar a pergunta mais similar no FAQ considerando variáveis usando BERT
-    def encontrar_pergunta_similar_bert(pergunta_usuario, faq):
-        similaridade_maxima = 0.3
-        pergunta_similar = None
-        resposta = None
+    def _initialize_engine(self, engine_type):
+        if engine_type == 'bert':
+            if self.bert_engine is None:
+                from bert_engine import BertEngine
+                self.bert_engine = BertEngine()
+            return self.bert_engine
 
-        for pergunta_faq, resposta_faq in faq.items():
-            # Preprocessar as perguntas para o formato adequado do BERT
-            inputs = tokenizer.encode_plus(pergunta_usuario.lower(), pergunta_faq.lower(), return_tensors='pt', add_special_tokens=True)
-            # Fazer a predição se a pergunta do usuário segue a pergunta do FAQ
-            outputs = model(**inputs)
-            logits = outputs.logits
-            if torch.argmax(logits, dim=1) == torch.tensor(0):
-                similaridade = logits[0][0].item()
-                if similaridade > similaridade_maxima:
-                    similaridade_maxima = similaridade
-                    pergunta_similar = pergunta_faq
-                    resposta = resposta_faq
+        elif engine_type == 'jaccard':
+            if self.jaccard_engine is None:
+                from jaccard_engine import JaccardEngine
+                self.jaccard_engine = JaccardEngine()
+            return self.jaccard_engine
 
-        return pergunta_similar, resposta
+        return None
 
-    # Função para encontrar a pergunta mais similar no FAQ considerando variaÃ§Ãµes usando Similaridade de Jaccard
-    def encontrar_pergunta_similar_jaccard(pergunta_usuario, faq):
-        similaridade_maxima = 0.3
-        pergunta_similar = None
-        resposta = None
+    def get_resposta(self, pergunta_usuario, engine):
+        with open("data.json", 'r', encoding='utf-8') as f:
+            faq = json.load(f)
 
-        for pergunta_faq, resposta_faq in faq.items():
-            similaridade = SequenceMatcher(None, pergunta_usuario.lower(), pergunta_faq.lower()).ratio()
-            if similaridade > similaridade_maxima:
-                similaridade_maxima = similaridade
-                pergunta_similar = pergunta_faq
-                resposta = resposta_faq
+        res = {
+            "data": {},
+            "status": "ok"
+        }
 
-        return pergunta_similar, resposta
+        if engine == 1:
+            bert_engine = self._initialize_engine('bert')
+            res["data"]["bert"] = bert_engine.get_resposta(pergunta_usuario, faq)
+        elif engine == 2:
+            jaccard_engine = self._initialize_engine('jaccard')
+            res["data"]["jaccard"] = jaccard_engine.get_resposta(pergunta_usuario, faq)
+        else:
+            bert_engine = self._initialize_engine('bert')
+            jaccard_engine = self._initialize_engine('jaccard')
+            res["data"]["bert"] = bert_engine.get_resposta(pergunta_usuario, faq)
+            res["data"]["jaccard"] = jaccard_engine.get_resposta(pergunta_usuario, faq)
 
-
-    # Receber a pergunta do usuário
-    # pergunta_usuario = input("Você: ")
-    
-    # Encontrar a pergunta mais similar no FAQ usando BERT
-    pergunta_similar_bert, resposta_bert = encontrar_pergunta_similar_bert(pergunta_usuario, faq)
-
-    # Encontrar a pergunta mais similar no FAQ usando Jaccard
-    pergunta_similar_jaccard, resposta_jaccard = encontrar_pergunta_similar_jaccard(pergunta_usuario, faq)
-
-    # Imprimir as respostas
-    if pergunta_similar_bert is not None:
-        res_bert = "Usando BERT: " + resposta_bert
-    else:
-        print("Bot: Desculpe, não encontrei uma resposta para essa pergunta usando BERT.")
-
-    if pergunta_similar_jaccard is not None:
-        res_jaccard = "Usando Jaccard: " + resposta_jaccard
-    else:
-        print("Bot: Desculpe, não encontrei uma resposta para essa pergunta usando Jaccard.")
-
-    res = {
-        "data":{
-            "bert" :{"pergunta" : pergunta_similar_bert ,"res" : res_bert},
-            "jaccard":{"pergunta" : pergunta_similar_jaccard ,"res" : res_jaccard}
-        },
-        "status": "ok"
-    }
-    return  res
+        return res
