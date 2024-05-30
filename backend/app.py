@@ -1,9 +1,13 @@
 from flask import Flask, request, jsonify
 from ia import ResponseEngine
-
+from flask import Flask
+from flask_cors import CORS, cross_origin
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/send_question', methods=['POST'])
+@cross_origin()
 def create_item():
     parametros = request.get_json()
     engine = ResponseEngine()
