@@ -50,5 +50,5 @@ class ResponseEngine:
             jaccard_engine = self._initialize_engine('jaccard')
             res["data"]["bert"] = bert_engine.get_resposta(pergunta_usuario, faq)
             res["data"]["jaccard"] = jaccard_engine.get_resposta(pergunta_usuario, faq)
-
+            res["data"]["roberta"] = roberta_engine.get_resposta(pergunta_usuario, faq)
         return res
