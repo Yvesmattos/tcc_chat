@@ -16,3 +16,7 @@ def create_item():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+# padrão 0.5739443898200989
+# mais perguntas mesmas respostas 0.769791841506958
+# usando o modelo treinado com perguntas:perguntas 0.9320012927055359

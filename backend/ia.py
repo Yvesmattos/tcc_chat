@@ -28,7 +28,7 @@ class ResponseEngine:
         return None
 
     def get_resposta(self, pergunta_usuario, engine):
-        with open("data.json", 'r', encoding='utf-8') as f:
+        with open("C:/Users/pizza/Desktop/ProjetosPython/tcc_chat/backend/faq.json", 'r', encoding='utf-8') as f:
             faq = json.load(f)
 
         res = {
@@ -48,6 +48,7 @@ class ResponseEngine:
         else:
             bert_engine = self._initialize_engine('bert')
             jaccard_engine = self._initialize_engine('jaccard')
+            roberta_engine = self._initialize_engine('roberta')
             res["data"]["bert"] = bert_engine.get_resposta(pergunta_usuario, faq)
             res["data"]["jaccard"] = jaccard_engine.get_resposta(pergunta_usuario, faq)
             res["data"]["roberta"] = roberta_engine.get_resposta(pergunta_usuario, faq)
