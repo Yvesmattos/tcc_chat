@@ -5,7 +5,7 @@ from sentence_transformers import SentenceTransformer, util
 class RobertaEngine:
     def __init__(self):
         # model_name = 'C:/Users/pizza/Desktop/ProjetosPython/treinamento/paraphrase_faq_model'
-        model_name = 'C:/Users/pizza/Desktop/ProjetosPython/TCC_CHAT/backend/2024_06_05_v1'
+        model_name = 'C:/Users/pizza/Desktop/ProjetosPython/TCC_CHAT/backend/2024_06_06_v1'
         # model_name = 'paraphrase-MiniLM-L6-v2'
         self.model = SentenceTransformer(model_name)
 
