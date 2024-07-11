@@ -13,5 +13,6 @@ def index():
 def send_question():
     parametros = request.get_json()
     chat = ChatService()
-    resultado = chat.get_resposta(parametros["pergunta"])
+    resultado = chat.get_resposta(parametros['pergunta'])
+    
     return jsonify(resultado), 201

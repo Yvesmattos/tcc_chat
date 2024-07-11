@@ -1,0 +1,27 @@
+/* src/components/ChatMessage.css */
+.chat-message {
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 8px;
+    max-width: 80%;
+    word-wrap: break-word;
+  }
+  
+  .chat-message.user {
+    background-color: #cfe8fc;
+    align-self: flex-end;
+    text-align: right;
+  }
+  
+  .chat-message.assistant {
+    background-color: #e0e0e0;
+    align-self: flex-start;
+    text-align: left;
+  }
+  
+  .chat-message.system {
+    background-color: #f0f0f0;
+    align-self: center;
+    text-align: center;
+  }
+  

@@ -5,14 +5,12 @@ import numpy as np
 # from nltk.tokenize import word_tokenize
 # from nltk.stem import WordNetLemmatizer
 from sentence_transformers import SentenceTransformer, util
-from dotenv import load_dotenv
 import os
 
 class ChatService:
     
     def __init__(self):
-        load_dotenv()
-        chat = Chat(os.getenv("FOLDER") + 'backend/modelos/2024_06_14_v2')
+        chat = Chat('paraphrase-MiniLM-L6-v2')
         self.model = SentenceTransformer(chat.engine_name)
         # self.stop_words = set(stopwords.words('portuguese'))
         # self.lemmatizer = WordNetLemmatizer()
@@ -23,7 +21,7 @@ class ChatService:
     #     return ' '.join(tokens)
 
     def get_resposta(self, pergunta_usuario):
-        with open(os.getenv("FOLDER") + "backend/app/files/FAQ.json", 'r', encoding='utf-8') as f:
+        with open("C:/Users/ymattos/OneDrive/Área de Trabalho/yves/meus docs/TCC ADS/projeto-tcc/tcc_chat/backend/app/files/FAQ.json", 'r', encoding='utf-8') as f:
             faq = json.load(f)
         
         qa_pairs = [(question, answer) for question, answer in faq.items()]

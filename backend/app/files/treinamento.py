@@ -2,16 +2,17 @@ import json
 import os
 from sentence_transformers import SentenceTransformer, InputExample, losses
 from torch.utils.data import DataLoader
-from dotenv import load_dotenv
 import os
-load_dotenv()
 
 # Carregar o modelo pré-treinado
 # model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
-model = SentenceTransformer(os.getenv("FOLDER")+"backend/modelos/2024_06_14_v2")
+model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
+diretorio_atual = os.path.dirname(__file__)
+caminho_arquivo = os.path.join(diretorio_atual, 'treinamento_perguntas.json')
 
+print(caminho_arquivo)
 # Carregar dados de treinamento a partir de um arquivo JSON
-with open(os.getenv("FOLDER")+'backend/app/files/treinamento_perguntas.json', 'r', encoding='utf-8') as f:
+with open(caminho_arquivo, 'r', encoding='utf-8') as f:
     treinamento_perguntas = json.load(f)
 
 # Preparar exemplos para treinamento
