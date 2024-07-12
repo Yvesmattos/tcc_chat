@@ -1,7 +1,9 @@
 // src/components/ChatModal.js
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
+import FeedbackButtons from './FeedbackButtons';
+import useWebSocket from './WebSocketHandler';
 import './ChatModal.css';
 
 const ChatModal = () => {
@@ -10,21 +12,17 @@ const ChatModal = () => {
   const [inputValue, setInputValue] = useState('');
   const [awaitingFeedback, setAwaitingFeedback] = useState(false);
   const [isHumanSupport, setIsHumanSupport] = useState(false);
-  const ws = useRef(null);
+  const { sendMessage } = useWebSocket(isHumanSupport, setMessages, setIsHumanSupport);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleSendMessage = async () => {
     if (isHumanSupport) {
-      // Enviar mensagem para o WebSocket
-      if (ws.current) {
-        ws.current.send(inputValue);
-        setMessages((prevMessages) => [...prevMessages, { type: 'user', text: inputValue }]);
-        setInputValue('');
-      }
+      sendMessage(inputValue);
+      setMessages((prevMessages) => [...prevMessages, { type: 'user', text: inputValue }]);
+      setInputValue('');
     } else {
-      // Enviar mensagem para a API de IA
       const newMessage = { type: 'user', text: inputValue };
       setMessages((prevMessages) => [...prevMessages, newMessage]);
       setInputValue('');
@@ -38,7 +36,7 @@ const ChatModal = () => {
       });
 
       const data = await response.json();
-      const resposta = data.message[0].resposta; // Acessar apenas a propriedade `resposta`
+      const resposta = data.message[0].resposta;
       setMessages((prevMessages) => [...prevMessages, { type: 'assistant', text: resposta }]);
       setAwaitingFeedback(true);
     }
@@ -48,47 +46,13 @@ const ChatModal = () => {
     if (feedback === 'sim') {
       setMessages((prevMessages) => [...prevMessages, { type: 'system', text: 'Obrigado! O chat foi encerrado.' }]);
       setAwaitingFeedback(false);
-      setIsHumanSupport(false);  // Encerrar suporte humano
+      setIsHumanSupport(false);
     } else {
       setMessages((prevMessages) => [...prevMessages, { type: 'system', text: 'Transferindo para um atendente humano...' }]);
       setAwaitingFeedback(false);
       setIsHumanSupport(true);
-
-      // Conectar ao WebSocket para atendimento humano
-      ws.current = new WebSocket('ws://localhost:5001');
-
-      ws.current.onopen = () => {
-        console.log('Conectado ao WebSocket para atendimento humano');
-      };
-
-      ws.current.onmessage = async (event) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const text = reader.result;
-          setMessages((prevMessages) => [...prevMessages, { type: 'assistant', text }]);
-        };
-        reader.readAsText(event.data);
-      };
-
-      ws.current.onerror = (error) => {
-        console.error('Erro no WebSocket:', error);
-      };
-
-      ws.current.onclose = () => {
-        console.log('Desconectado do WebSocket');
-        setIsHumanSupport(false);  // Atualiza o estado ao fechar a conexão
-      };
     }
   };
-
-  useEffect(() => {
-    // Limpeza ao desmontar o componente
-    return () => {
-      if (ws.current) {
-        ws.current.close();
-      }
-    };
-  }, []);
 
   return (
     <div>
@@ -106,10 +70,7 @@ const ChatModal = () => {
               ))}
             </div>
             {awaitingFeedback ? (
-              <div className="feedback-buttons">
-                <button onClick={() => handleFeedback('sim')}>Sim</button>
-                <button onClick={() => handleFeedback('não')}>Não</button>
-              </div>
+              <FeedbackButtons handleFeedback={handleFeedback} />
             ) : (
               <ChatInput
                 inputValue={inputValue}
