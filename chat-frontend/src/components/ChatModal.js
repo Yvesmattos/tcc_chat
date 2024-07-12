@@ -61,9 +61,13 @@ const ChatModal = () => {
         console.log('Conectado ao WebSocket para atendimento humano');
       };
 
-      ws.current.onmessage = (event) => {
-        console.log(event)
-        setMessages((prevMessages) => [...prevMessages, { type: 'assistant', text: event.data }]);
+      ws.current.onmessage = async (event) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const text = reader.result;
+          setMessages((prevMessages) => [...prevMessages, { type: 'assistant', text }]);
+        };
+        reader.readAsText(event.data);
       };
 
       ws.current.onerror = (error) => {

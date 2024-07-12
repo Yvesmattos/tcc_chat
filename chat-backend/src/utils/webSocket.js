@@ -1,3 +1,4 @@
+// src/utils/webSocket.js
 const WebSocket = require('ws');
 
 const initializeWebSocket = (server) => {
@@ -12,7 +13,13 @@ const initializeWebSocket = (server) => {
 
     ws.on('message', (message) => {
       console.log(`Mensagem recebida: ${message}`);
-      // Adicione lógica para encaminhar a mensagem para o suporte humano ou responder ao cliente
+
+      // Broadcast da mensagem para todos os clientes conectados, exceto o remetente
+      wss.clients.forEach((client) => {
+        if (client !== ws && client.readyState === WebSocket.OPEN) {
+          client.send(message);
+        }
+      });
     });
 
     ws.on('close', () => {

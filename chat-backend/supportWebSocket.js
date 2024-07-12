@@ -9,7 +9,9 @@ ws.onopen = () => {
 };
 
 ws.onmessage = (event) => {
-  console.log('Mensagem recebida do cliente:', event.data);
+  // Converter o buffer para uma string legível
+  const message = Buffer.from(event.data).toString();
+  console.log('Mensagem recebida do cliente:', message);
 };
 
 ws.onerror = (error) => {
