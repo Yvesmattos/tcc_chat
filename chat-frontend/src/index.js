@@ -1,10 +1,11 @@
-// src/index.js
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 
 function initialize(containerId) {
-  ReactDOM.render(<App />, document.getElementById(containerId));
+  const container = document.getElementById(containerId);
+  const root = createRoot(container);
+  root.render(<App />);
 }
 
 // Exponha a função de inicialização globalmente
