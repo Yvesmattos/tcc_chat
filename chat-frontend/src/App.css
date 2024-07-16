@@ -44,12 +44,13 @@ iframe {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-iframe #iatendimento-chat{
+iframe #iatendimento-chat {
   border: none;
   width: 100vw;
   height: 100vh;
