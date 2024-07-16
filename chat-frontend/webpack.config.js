@@ -6,6 +6,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.[contenthash].js',
+    library: 'MyApp', // Nome da biblioteca para acessar a partir do HTML
+    libraryTarget: 'umd',
     publicPath: '/'
   },
   mode: 'production',
