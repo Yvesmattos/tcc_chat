@@ -50,7 +50,7 @@ iframe {
   }
 }
 
-iframe #iatendimento-chat {
+iframe#iatendimento-chat {
   border: none;
   width: 100vw;
   height: 100vh;
