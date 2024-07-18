@@ -14,7 +14,17 @@ const ChatModal = () => {
   const [isHumanSupport, setIsHumanSupport] = useState(false);
   const { sendMessage } = useWebSocket(isHumanSupport, setMessages, setIsHumanSupport);
 
-  const handleOpen = () => setOpen(true);
+  const getGreeting = () => {
+    const currentHour = new Date().getHours();
+    const greeting = currentHour < 12 ? 'Bom dia!' : currentHour < 18 ? 'Boa tarde!' : 'Boa noite!';
+    return `${greeting}<br/>Eu sou sua IAtendente, e estou aqui para te ajudar. Digite em apenas uma frase o que você precisa.`;
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+    setMessages([{ type: 'system', text: getGreeting(), isHtml: true }]);
+  };
+
   const handleClose = () => setOpen(false);
 
   const handleSendMessage = async () => {
@@ -60,8 +70,11 @@ const ChatModal = () => {
       {open && (
         <div className="chat-modal">
           <div className="chat-modal-header">
-            <h2>Chat de Atendimento</h2>
-            <button className="close-button" onClick={handleClose}>X</button>
+            <div style={{display: 'flex', flexDirection: 'row'}}>
+              <img src="/logo_iai.png" alt="Logo" className="logo-image" width={60} height={60} style={{margin: "auto"}}/>
+              <h2>IAtendente</h2>
+            </div>
+            <button className="close-button" onClick={handleClose}><span title='Minimizar' style={{ fontWeight: 900 }}>_</span></button>
           </div>
           <div className="chat-modal-content">
             <div className="chat-messages">

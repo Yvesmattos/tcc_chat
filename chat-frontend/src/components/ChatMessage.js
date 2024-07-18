@@ -4,8 +4,10 @@ import './ChatMessage.css';
 
 const ChatMessage = ({ message }) => {
   return (
-    <div className={`chat-message ${message.type}`}>
-      <p>{message.text}</p>
+    <div className={`container-message-${message.type}`}>
+      <div className={`chat-message ${message.type}`}>
+        <p dangerouslySetInnerHTML={{ __html: message.text }}></p>
+      </div>
     </div>
   );
 };
