@@ -5,6 +5,7 @@ import ChatInput from './ChatInput';
 import FeedbackButtons from './FeedbackButtons';
 import useWebSocket from './WebSocketHandler';
 import './ChatModal.css';
+import IdentificationForm from './Identification/IdentifiationChatModal';
 
 const ChatModal = () => {
   const [open, setOpen] = useState(false);
@@ -12,17 +13,17 @@ const ChatModal = () => {
   const [inputValue, setInputValue] = useState('');
   const [awaitingFeedback, setAwaitingFeedback] = useState(false);
   const [isHumanSupport, setIsHumanSupport] = useState(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const { sendMessage } = useWebSocket(isHumanSupport, setMessages, setIsHumanSupport);
 
   const getGreeting = () => {
     const currentHour = new Date().getHours();
     const greeting = currentHour < 12 ? 'Bom dia!' : currentHour < 18 ? 'Boa tarde!' : 'Boa noite!';
-    return `${greeting}<br/>Eu sou sua IAtendente, e estou aqui para te ajudar. Digite em apenas uma frase o que você precisa.`;
+    return `${greeting}<br/>Eu sou sua IAtendente, e estou aqui para te IAjudar. Digite em apenas uma frase o que você precisa.`;
   };
 
   const handleOpen = () => {
     setOpen(true);
-    setMessages([{ type: 'system', text: getGreeting(), isHtml: true }]);
   };
 
   const handleClose = () => setOpen(false);
@@ -64,15 +65,27 @@ const ChatModal = () => {
     }
   };
 
+  const handleFormSubmit = (data) => {
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { type: 'system', text: `Informações recebidas: <br>Nome - ${data.nome}, <br>Email - ${data.email}, <br>Telefone - ${data.fone}` },
+      { type: 'system', text: getGreeting(), isHtml: true }
+    ]);
+    setIsFormSubmitted(true);
+  };
+
   return (
     <div>
-      <button className="chat-button" onClick={handleOpen}>Abrir Chat</button>
+      <button className="chat-button" onClick={handleOpen}>
+        <img src="/logo_iai.png" alt="Logo" className="logo-image" width={40} height={40} />
+        <span>IAtendente</span>
+      </button>
       {open && (
         <div className="chat-modal">
           <div className="chat-modal-header">
-            <div style={{display: 'flex', flexDirection: 'row'}}>
-              <img src="/logo_iai.png" alt="Logo" className="logo-image" width={60} height={60} style={{margin: "auto"}}/>
-              <h2>IAtendente</h2>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <img src="/logo_iai.png" alt="Logo" className="logo-image" width={60} height={60} style={{ margin: "auto" }} />
+              <h2 style={{color: "white", fontWeight: 'bold'}}>IAtendente</h2>
             </div>
             <button className="close-button" onClick={handleClose}><span title='Minimizar' style={{ fontWeight: 900 }}>_</span></button>
           </div>
@@ -82,14 +95,18 @@ const ChatModal = () => {
                 <ChatMessage key={index} message={message} />
               ))}
             </div>
-            {awaitingFeedback ? (
-              <FeedbackButtons handleFeedback={handleFeedback} />
+            {isFormSubmitted ? (
+              awaitingFeedback ? (
+                <FeedbackButtons handleFeedback={handleFeedback} />
+              ) : (
+                <ChatInput
+                  inputValue={inputValue}
+                  setInputValue={setInputValue}
+                  handleSendMessage={handleSendMessage}
+                />
+              )
             ) : (
-              <ChatInput
-                inputValue={inputValue}
-                setInputValue={setInputValue}
-                handleSendMessage={handleSendMessage}
-              />
+              <IdentificationForm onSubmit={handleFormSubmit} />
             )}
           </div>
         </div>
