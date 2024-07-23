@@ -25,7 +25,8 @@
 }
 
 .chat-message.user {
-  background-color: #cfe8fc;
+  background-color: #666f7a;
+  color: white;
   text-align: right;
   display: inline-block;
 }

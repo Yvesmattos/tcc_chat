@@ -82,3 +82,9 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
