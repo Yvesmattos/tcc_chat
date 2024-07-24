@@ -8,9 +8,7 @@ const useWebSocket = (isHumanSupport, setMessages, setIsHumanSupport) => {
     if (isHumanSupport) {
       ws.current = new WebSocket('ws://localhost:5001');
 
-      ws.current.onopen = () => {
-        console.log('Conectado ao WebSocket para atendimento humano');
-      };
+      ws.current.onopen = () => {};
 
       ws.current.onmessage = (event) => {
         const reader = new FileReader();
@@ -26,7 +24,6 @@ const useWebSocket = (isHumanSupport, setMessages, setIsHumanSupport) => {
       };
 
       ws.current.onclose = () => {
-        console.log('Desconectado do WebSocket');
         setIsHumanSupport(false);  // Atualiza o estado ao fechar a conexão
       };
     }

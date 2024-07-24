@@ -20,9 +20,7 @@ app.use(cors({
 
 app.use('/chat', chatRoutes);
 
-const server = app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`);
-});
+const server = app.listen(port, () => {});
 
 // Passe o servidor para a função initializeWebSocket
 initializeWebSocket(server);

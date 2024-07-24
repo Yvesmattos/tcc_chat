@@ -9,11 +9,7 @@ const initializeWebSocket = (server) => {
   const wss = new WebSocket.Server({ server });
 
   wss.on('connection', (ws) => {
-    console.log('Cliente conectado via WebSocket');
-
     ws.on('message', (message) => {
-      console.log(`Mensagem recebida: ${message}`);
-
       // Broadcast da mensagem para todos os clientes conectados, exceto o remetente
       wss.clients.forEach((client) => {
         if (client !== ws && client.readyState === WebSocket.OPEN) {
@@ -22,9 +18,7 @@ const initializeWebSocket = (server) => {
       });
     });
 
-    ws.on('close', () => {
-      console.log('Cliente desconectado via WebSocket');
-    });
+    ws.on('close', () => { });
   });
 };
 

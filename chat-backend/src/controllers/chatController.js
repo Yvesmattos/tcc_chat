@@ -15,13 +15,8 @@ const sendQuestion = async (req, res) => {
       // Se a resposta for insatisfatória, inicie o suporte WebSocket
       if (!suporteWs) {
         suporteWs = new WebSocket('ws://localhost:5001');
-        suporteWs.on('open', () => {
-          console.log('Suporte conectado ao WebSocket');
-        });
-        suporteWs.on('message', (message) => {
-          console.log(`Mensagem recebida do cliente: ${message}`);
-          // Adicione lógica para enviar uma resposta ao cliente
-        });
+        suporteWs.on('open', () => {});
+        suporteWs.on('message', (message) => {}); // Adicione lógica para enviar uma resposta ao cliente
       }
     }
 
