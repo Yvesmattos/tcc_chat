@@ -39,7 +39,8 @@ const SupportDashboard = () => {
   };
 
   const handleSendMessage = () => {
-    sendMessage(inputValue);
+    let mensagem = [message => inputValue, type => 'message']
+    sendMessage(mensagem);
     setMessages((prevMessages) => [...prevMessages, { type: 'user', text: inputValue }]);
     setInputValue('');
   };

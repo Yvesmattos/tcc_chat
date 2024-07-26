@@ -37,7 +37,7 @@ const useWebSocket = (isHumanSupport, setMessages, setIsHumanSupport) => {
 
   const sendMessage = (message) => {
     if (ws.current) {
-      ws.current.send(message);
+      ws.current.send(JSON.stringify({ type: 'message', message, sender: 'user'}));
     }
   };
 
