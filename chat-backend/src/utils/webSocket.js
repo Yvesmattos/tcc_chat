@@ -8,7 +8,9 @@ const initializeWebSocket = (server) => {
 
   const wss = new WebSocket.Server({ server });
 
-  wss.on('connection', (ws) => {
+  wss.on('connection', (ws) => {  
+    console.log('Cliente conectado');
+
     ws.on('message', (message) => {
       // Broadcast da mensagem para todos os clientes conectados, exceto o remetente
       wss.clients.forEach((client) => {
@@ -18,7 +20,9 @@ const initializeWebSocket = (server) => {
       });
     });
 
-    ws.on('close', () => { });
+    ws.on('close', () => {
+      console.log('Cliente desconectado');
+    });
   });
 };
 

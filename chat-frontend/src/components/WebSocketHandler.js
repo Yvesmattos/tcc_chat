@@ -13,7 +13,7 @@ const useWebSocket = (isHumanSupport, setMessages, setIsHumanSupport) => {
       ws.current.onmessage = (event) => {
         const reader = new FileReader();
         reader.onload = () => {
-          const text = reader.result;
+          const text = JSON.parse(reader.result).message;
           setMessages((prevMessages) => [...prevMessages, { type: 'assistant', text }]);
         };
         reader.readAsText(event.data);
