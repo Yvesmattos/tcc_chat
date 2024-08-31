@@ -6,3 +6,4 @@ const sequelize = new Sequelize('suporte', 'root', '', {
 });
 
 module.exports = sequelize;
+ 
