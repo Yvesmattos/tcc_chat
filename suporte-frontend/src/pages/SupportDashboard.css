@@ -1,23 +1,63 @@
-/* SupportDashboard.css */
-
+/* Estrutura principal */
 .dashboard-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  height: 100vh; /* Preenche a tela inteira */
+  overflow: hidden;
 }
 
+/* Barra de título e botão de logout */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky; /* Fixa o header no topo */
+  top: 0;
+  z-index: 10; /* Garante que o header fique acima do conteúdo */
+}
+
+.logout-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #cc0000;
+}
+
+/* Conteúdo principal com lista de chats e detalhes do chat */
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Lista de chats */
 .chat-list {
   width: 25%;
   padding: 10px;
   border-right: 1px solid #ddd;
+  overflow-y: auto;
 }
 
+/* Detalhes do chat */
 .chat-detail {
-  width: 75%;
+  flex: 1;
   padding: 10px;
   display: flex;
   flex-direction: column;
 }
 
+/* Listagem de mensagens */
 .messages {
   flex: 1;
   padding: 10px;
@@ -25,13 +65,14 @@
   border: 1px solid #ddd;
   background-color: #f9f9f9;
   margin-bottom: 10px;
+  border-radius: 5px;
 }
 
 .message {
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 5px;
-  max-width: 80%;
+  max-width: 75%;
   clear: both;
 }
 
@@ -48,6 +89,7 @@
   margin-right: auto;
 }
 
+/* Área de resposta e botões */
 .response-area {
   display: flex;
   flex-direction: column;
@@ -60,6 +102,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   margin-bottom: 10px;
+  font-size: 14px;
 }
 
 .response-area button {
@@ -69,34 +112,45 @@
   padding: 10px;
   border-radius: 4px;
   cursor: pointer;
-  margin-bottom: 10px; /* Espaçamento entre botões */
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+.response-area button:hover {
+  background-color: #0056b3;
 }
 
 .response-area button:last-child {
-  margin-bottom: 0; /* Remove a margem inferior do último botão */
+  margin-bottom: 0;
 }
 
+/* Estilo dos itens da lista de chats */
 .chat-item {
   cursor: pointer;
   padding: 10px;
   border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s;
 }
 
 .chat-item:hover {
-  background-color: #f1f1f1;
+  background-color: #e0e0e0;
 }
 
+/* Estilo dos títulos */
 h1, h2 {
-  font-size: 16px;
   margin: 0;
   padding: 10px 0;
 }
 
 h1 {
-  font-size: 24px;
-  border-bottom: 2px solid #007bff;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
 }
 
 h2 {
-  font-size: 18px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #555;
 }

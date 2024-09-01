@@ -162,59 +162,82 @@ function SupportDashboard() {
     }
   };
 
+  // Função de Logout
+  const handleLogout = () => {
+    // Fechar conexão WebSocket, se ativa
+    if (ws) {
+      ws.close();
+    }
+
+    // Remover o token de autenticação do localStorage
+    localStorage.removeItem('token');
+
+    // Redirecionar para a página de login
+    window.location.href = '/login'; // Altere o caminho conforme necessário
+  };
+
   return (
     <div className="dashboard-container">
-      <div className="chat-list">
+      <div className="header">
         <h1>Dashboard de Suporte</h1>
-        <h2>Chats Pendentes</h2>
-        <ul>
-          {chats.map((chat) => (
-            <li
-              key={chat.id}
-              className="chat-item"
-              onClick={() => setSelectedChat(chat)}
-            >
-              Chat {chat.id}
-            </li>
-          ))}
-        </ul>
-        <h2>Chats Respondidos</h2>
-        <ul>
-          {resolvedChats.map((chat) => (
-            <li
-              key={chat.id}
-              className="chat-item"
-            >
-              Chat {chat.id}
-            </li>
-          ))}
-        </ul>
+        <button onClick={handleLogout} className="logout-button">
+          Logout
+        </button>
       </div>
-      {selectedChat && (
-        <div className="chat-detail">
-          <h2>Chat {selectedChat.id}</h2>
-          <div className="messages">
-            {selectedChat.messages.map((msg, index) => (
-              <div key={index} className={`message ${msg.sender}`}>
-                {msg.text}
-              </div>
+
+      <div className="main-content">
+        <div className="chat-list">
+          <h2>Chats Pendentes</h2>
+          <ul>
+            {chats.map((chat, index) => (
+              <li
+                key={chat.id + ' - ' + index}
+                className="chat-item"
+                onClick={() => {
+                  setSelectedChat(chat);
+                }}
+              >
+                Chat {chat.id}
+              </li>
             ))}
-          </div>
-          <div className="response-area">
-            <textarea
-              value={response}
-              onChange={(e) => setResponse(e.target.value)}
-              placeholder="Digite sua resposta"
-            />
-            <button onClick={handleRespond}>Responder</button>
-            <button onClick={handleMarkAsResolved}>
-              Marcar como Respondido
-            </button>
-          </div>
+          </ul>
+
+          <h2>Chats Respondidos</h2>
+          <ul>
+            {resolvedChats.map((chat) => (
+              <li key={chat.id} className="chat-item">
+                Chat {chat.id}
+              </li>
+            ))}
+          </ul>
         </div>
-      )}
+
+        {selectedChat && (
+          <div className="chat-detail">
+            <h2>Chat {selectedChat.id}</h2>
+            <div className="messages">
+              {selectedChat.messages.map((msg, index) => (
+                <div key={index} className={`message ${msg.sender}`}>
+                  {msg.text}
+                </div>
+              ))}
+            </div>
+
+            <div className="response-area">
+              <textarea
+                value={response}
+                onChange={(e) => setResponse(e.target.value)}
+                placeholder="Digite sua resposta"
+              />
+              <button onClick={handleRespond}>Responder</button>
+              <button onClick={handleMarkAsResolved}>Marcar como Respondido</button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
+
 
 export default SupportDashboard;
