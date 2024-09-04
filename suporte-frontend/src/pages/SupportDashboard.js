@@ -18,11 +18,11 @@ function SupportDashboard() {
       socket.send(JSON.stringify({ type: 'identify', userType: 'support', supportId }));
     };
 
-    socket.onmessage = (event) => {
+    socket.onmessage = async (event) => {
       const { chatId, sender, message } = JSON.parse(event.data);
-      const newMessage = { sender, text: message };
+      const newMessage = { sender, message: message };
 
-      // Atualizar lista de chats pendentes
+      // Atualizar a lista de chats pendentes e selecionados
       setChats((prevChats) => {
         const chatIndex = prevChats.findIndex((chat) => chat.id === chatId);
         if (chatIndex !== -1) {
@@ -111,16 +111,19 @@ function SupportDashboard() {
         setChats((prevChats) =>
           prevChats.map(chat =>
             chat.id === selectedChat.id
-              ? { ...chat, messages: [...chat.messages, { sender: 'support', text: response }] }
+              ? { ...chat, messages: [...chat.messages, { sender: 'support', message: response }] }
               : chat
           )
         );
+
+        console.log(response)
+
 
         // Atualizar o chat selecionado
         if (selectedChat) {
           setSelectedChat((prevChat) => ({
             ...prevChat,
-            messages: [...prevChat.messages, { sender: 'support', text: response }]
+            messages: [...prevChat.messages, { sender: 'support', message: response }]
           }));
         }
 
@@ -136,12 +139,13 @@ function SupportDashboard() {
     if (selectedChat) {
       try {
         // Marcar o chat como resolvido na API
-        await fetch(`http://localhost:5000/api/support/resolve-chat/${selectedChat.id}`, {
+        await fetch(`http://localhost:5000/api/support/respond/${selectedChat.id}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
+          },
+          body: JSON.stringify({ response: 'Chat marcado como resolvido' })
         });
 
         // Atualizar a lista de chats e adicionar à lista de chats resolvidos
@@ -176,6 +180,21 @@ function SupportDashboard() {
     window.location.href = '/login'; // Altere o caminho conforme necessário
   };
 
+  const getChatMessages = async (chat) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/support/chats/${chat.id}/messages`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      const messages = await response.json();
+      console.log(messages)
+      setSelectedChat({ ...chat, messages });
+    } catch (error) {
+      console.error('Erro ao buscar mensagens do chat:', error);
+    }
+  }
+
   return (
     <div className="dashboard-container">
       <div className="header">
@@ -189,15 +208,15 @@ function SupportDashboard() {
         <div className="chat-list">
           <h2>Chats Pendentes</h2>
           <ul>
-            {chats.map((chat, index) => (
+            {chats.map((chat) => (
               <li
-                key={chat.id + ' - ' + index}
-                className="chat-item"
+                key={chat.id}
+                className="chat-item chat-pending"
                 onClick={() => {
-                  setSelectedChat(chat);
+                  getChatMessages(chat);
                 }}
               >
-                Chat {chat.id}
+                Conversa - {chat.client_id}
               </li>
             ))}
           </ul>
@@ -205,8 +224,14 @@ function SupportDashboard() {
           <h2>Chats Respondidos</h2>
           <ul>
             {resolvedChats.map((chat) => (
-              <li key={chat.id} className="chat-item">
-                Chat {chat.id}
+              <li
+                key={chat.id}
+                className="chat-item chat-resolved"
+                onClick={() => {
+                  getChatMessages(chat);
+                }}
+              >
+                Conversa - {chat.client_id}
               </li>
             ))}
           </ul>
@@ -218,7 +243,7 @@ function SupportDashboard() {
             <div className="messages">
               {selectedChat.messages.map((msg, index) => (
                 <div key={index} className={`message ${msg.sender}`}>
-                  {msg.text}
+                  {msg.message}
                 </div>
               ))}
             </div>
@@ -230,7 +255,9 @@ function SupportDashboard() {
                 placeholder="Digite sua resposta"
               />
               <button onClick={handleRespond}>Responder</button>
-              <button onClick={handleMarkAsResolved}>Marcar como Respondido</button>
+              {!selectedChat.resolved && (
+                <button onClick={handleMarkAsResolved}>Marcar como Respondido</button>
+              )}
             </div>
           </div>
         )}
@@ -238,6 +265,5 @@ function SupportDashboard() {
     </div>
   );
 }
-
 
 export default SupportDashboard;
