@@ -213,7 +213,7 @@ function SupportDashboard() {
                 key={chat.id}
                 className="chat-item chat-pending"
                 onClick={() => {
-                  getChatMessages(chat);
+                  setSelectedChat(chat);
                 }}
               >
                 Conversa - {chat.client_id}
@@ -241,7 +241,7 @@ function SupportDashboard() {
           <div className="chat-detail">
             <h2>Chat {selectedChat.id}</h2>
             <div className="messages">
-              {selectedChat.messages.map((msg, index) => (
+              {selectedChat.messages?.map((msg, index) => (
                 <div key={index} className={`message ${msg.sender}`}>
                   {msg.message}
                 </div>

@@ -33,8 +33,6 @@ const ChatModal = () => {
       // Quando uma mensagem é recebida do WebSocket
       socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
-        console.log(data.sender)
-
         if (data.sender === 'support') {
           setMessages((prevMessages) => [...prevMessages, { type: 'assistant', text: data.message }]);
         }
@@ -80,37 +78,42 @@ const ChatModal = () => {
       setInputValue('');
       setLoading(true); // Set loading to true when sending a message
 
-      const response = await fetch('http://127.0.0.1:8085/chat/send_question', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ pergunta: inputValue })
-      });
+      // const response = await fetch('http://127.0.0.1:8085/chat/send_question', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({ pergunta: inputValue })
+      // });
 
-      const data = await response.json();
-      const resposta = data[0].resposta;
-      console.log(resposta)
-      setMessages((prevMessages) => [...prevMessages, { type: 'assistant', text: resposta }]);
+      // const data = await response.json();
+      // const resposta = data[0].resposta;
+      // console.log(resposta)
+      // setMessages((prevMessages) => [...prevMessages, { type: 'assistant', text: resposta }]);
       setLoading(false); // Set loading to false when response is received
       setAwaitingFeedback(true);
     }
   };
 
-  const handleFeedback = (feedback) => {
+  const handleFeedback = async (feedback) => {
     if (feedback === 'sim') {
       setMessages((prevMessages) => [...prevMessages, { type: 'system', text: 'Obrigado! O chat foi encerrado.' }]);
       setAwaitingFeedback(false);
       setIsHumanSupport(false);
     } else {
+      console.log("entrou")
+      await fetch(`http://localhost:5000/api/support/chats`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ response: '' })
+      });
+
       setMessages((prevMessages) => [...prevMessages, { type: 'system', text: 'Transferindo para um atendente humano...' }]);
       setAwaitingFeedback(false);
       setIsHumanSupport(true);
-
-      // // Enviar mensagem para o suporte via WebSocket
-      // if (ws) {
-      //   ws.send(JSON.stringify({ type: 'message', message: 'Iniciar atendimento com o suporte' }));
-      // }
     }
   };
 
