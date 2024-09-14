@@ -25,8 +25,9 @@ router.post('/login', async (req, res) => {
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(400).send('Credenciais inválidas');
     }
-    const token = jwt.sign({ id: user.id }, 'secrect', { expiresIn: '1h' });
-    res.json({ token });
+    const token = jwt.sign({ id: user.id }, 'secrect', { expiresIn: '12h' });
+    console.log(user.id)
+    res.json({ token, id: user.id, userfullname: user.firstname + " " + user.lastname});
   } catch (error) {
     res.status(500).send('Erro ao realizar login');
   }

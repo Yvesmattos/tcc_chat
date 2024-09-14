@@ -1,133 +1,203 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './SupportDashboard.css';
+import Header from '../components/Header';
+import ChatDetail from '../components/ChatDetail';
+import ChatList from '../components/ChatList';
 
-function SupportDashboard() {
-  const [chats, setChats] = useState([]);
-  const [resolvedChats, setResolvedChats] = useState([]);
+const SupportDashboard = () => {
   const [selectedChat, setSelectedChat] = useState(null);
+  const [pendingChats, setPendingChats] = useState([]);
+  const [onGoingChats, setOnGoingChats] = useState([]);
+  const [resolvedChats, setResolvedChats] = useState([]);
   const [response, setResponse] = useState('');
-  const [ws, setWs] = useState(null);
-  const [supportId] = useState(`support-${Date.now()}`); // Gerar um ID único para o suporte
+  const [messageQueue, setMessageQueue] = useState([]);
+  const socketRef = useRef(null);
 
+  // Função para inicializar o WebSocket
+  const initializeWebSocket = useCallback(() => {
+    if (!socketRef.current) {
+      socketRef.current = new WebSocket('ws://localhost:8080');
+
+      socketRef.current.onopen = () => {
+        console.log('connected');
+        const support_id = localStorage.getItem('userid');
+        socketRef.current.send(
+          JSON.stringify({ type: 'identify', userType: 'support', support_id })
+        );
+      };
+    }
+  }, []);
+
+  // useEffect para estabelecer a conexão WebSocket
   useEffect(() => {
-    // Conectar ao WebSocket
-    const socket = new WebSocket('ws://localhost:8080');
-    setWs(socket);
-
-    socket.onopen = () => {
-      socket.send(JSON.stringify({ type: 'identify', userType: 'support', supportId }));
+    initializeWebSocket();
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.close();
+      }
     };
+  }, [initializeWebSocket]);
 
-    socket.onmessage = async (event) => {
-      const { chatId, sender, message } = JSON.parse(event.data);
-      const newMessage = { sender, message: message };
+  // Enviar mensagens da fila para o backend periodicamente
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      if (messageQueue.length > 0) {
+        try {
+          await fetch('http://localhost:5000/api/support/messages', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+            body: JSON.stringify(messageQueue),
+          });
 
-      // Atualizar a lista de chats pendentes e selecionados
-      setChats((prevChats) => {
-        const chatIndex = prevChats.findIndex((chat) => chat.id === chatId);
+          // Limpar a fila após o envio bem-sucedido
+          setMessageQueue([]);
+        } catch (error) {
+          console.error('Erro ao enviar mensagens para o backend:', error);
+        }
+      }
+    }, 10000); // Enviar a cada 10 segundos
+
+    return () => clearInterval(interval);
+  }, [messageQueue]);
+
+  const handleWebSocketMessage = useCallback((event) => {
+    const { sender, message, chatId, type, support_id } = JSON.parse(event.data);
+
+    if (type === 'attendance_confirmed') {
+      const currentSupportId = localStorage.getItem('userid'); // Suporte atual
+
+      if (support_id !== currentSupportId) {
+        // Remover o chat da lista de pendentes se foi assumido por outro suporte
+        setPendingChats((prevChats) => prevChats.filter((chat) => chat.chatId !== chatId));
+        console.log(`Chat ${chatId} foi assumido por outro suporte.`);
+      }
+    } else if (type === 'remove_pending_chat') {
+      // Remover o chat da lista de pendentes para todos os suportes
+      setPendingChats((prevChats) => prevChats.filter((chat) => chat.chatId !== chatId));
+      console.log(`Chat ${chatId} removido da lista de pendentes para este suporte.`);
+    } else {
+      const newMessage = { sender, sender_id: `vel01-teste`, message, timesend: new Date().toISOString().slice(0, 19).replace('T', ' '), chat_id: chatId };
+
+      // Adiciona a mensagem à fila
+      setMessageQueue((prevQueue) => [...prevQueue, newMessage]);
+
+      const updateChatList = (prevChats) => {
+        const chatIndex = prevChats.findIndex((chat) => chat.chatId === chatId);
         if (chatIndex !== -1) {
           const updatedChats = [...prevChats];
           updatedChats[chatIndex] = {
             ...updatedChats[chatIndex],
-            messages: [...updatedChats[chatIndex].messages, newMessage]
+            messages: [...updatedChats[chatIndex].messages, newMessage],
           };
           return updatedChats;
-        } else {
-          return [...prevChats, { id: chatId, messages: [newMessage], resolved: false }];
         }
-      });
+        return prevChats;
+      };
 
-      // Atualizar mensagens do chat selecionado
-      if (selectedChat && chatId === selectedChat.id) {
-        setSelectedChat((prevChat) => prevChat ? {
-          ...prevChat,
-          messages: [...prevChat.messages, newMessage]
-        } : null);
+      let updatedPending = updateChatList(pendingChats);
+      let updatedOngoing = updateChatList(onGoingChats);
+
+      if (updatedPending === pendingChats) {
+        if (updatedOngoing === onGoingChats) {
+          updatedPending = [
+            ...pendingChats,
+            { messages: [newMessage], status: 0, chatId },
+          ];
+        }
+        setOnGoingChats(updatedOngoing);
       }
-    };
 
-    // Fechar a conexão WebSocket quando o componente for desmontado
-    return () => {
-      socket.close();
-    };
-  }, [selectedChat, supportId]);
+      setPendingChats(updatedPending);
+
+      if (selectedChat && chatId === selectedChat.chatId) {
+        setSelectedChat((prevChat) =>
+          prevChat ? { ...prevChat, messages: [...prevChat.messages, newMessage] } : null
+        );
+      }
+    }
+  }, [pendingChats, onGoingChats, selectedChat]);
+
 
   useEffect(() => {
-    async function fetchChats() {
-      try {
-        const response = await fetch('http://localhost:5000/api/support/chats', {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-        const data = await response.json();
-        setChats(data);
-      } catch (error) {
-        console.error('Erro ao buscar chats:', error);
-      }
+    if (socketRef.current) {
+      socketRef.current.onmessage = handleWebSocketMessage;
     }
+  }, [handleWebSocketMessage]);
 
-    async function fetchResolvedChats() {
-      try {
-        const response = await fetch('http://localhost:5000/api/support/resolved-chats', {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-        const data = await response.json();
-        setResolvedChats(data);
-      } catch (error) {
-        console.error('Erro ao buscar chats respondidos:', error);
-      }
+  // Função para buscar os chats do servidor
+  const fetchChats = useCallback(async (status) => {
+    const support_id = localStorage.getItem('userid');
+
+    console.log(support_id);
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/support/chats?status=${status}&support_id=${support_id}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      });
+      return await response.json();
+    } catch (error) {
+      console.error(`Erro ao buscar chats com status ${status}:`, error);
+      return [];
     }
-
-    fetchChats();
-    fetchResolvedChats();
   }, []);
 
+  // Função para buscar todos os chats
+  const fetchAllChats = useCallback(async () => {
+    const [pending, ongoing, resolved] = await Promise.all([
+      fetchChats(0),
+      fetchChats(1),
+      fetchChats(2),
+    ]);
+
+    setPendingChats(pending);
+    setOnGoingChats(ongoing);
+    setResolvedChats(resolved);
+  }, [fetchChats]);
+
+  useEffect(() => {
+    fetchAllChats();
+  }, [fetchAllChats]);
+
+  // Demais funções relacionadas ao chat
   const handleRespond = async () => {
     if (selectedChat && response.trim() !== '') {
-      try {
-        await fetch(`http://localhost:5000/api/support/respond/${selectedChat.id}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          },
-          body: JSON.stringify({ response })
-        });
+      const messageData = {
+        message: response,
+        sender: 'support',
+        sender_id: localStorage.getItem('userid'),
+        timesend: "2024-09-01 17:16:59", // ajustar
+        chat_id: selectedChat.chatId,
+      };
 
-        // Enviar a resposta para o WebSocket
-        if (ws) {
-          ws.send(JSON.stringify({
-            chatId: selectedChat.id,
+      try {
+        // Adiciona a mensagem à fila
+        setMessageQueue((prevQueue) => [...prevQueue, messageData]);
+
+        if (socketRef.current) {
+          socketRef.current.send(JSON.stringify({
+            chatId: selectedChat.chatId,
             sender: 'support',
             message: response,
-            type: "support_response"
+            type: 'support_message',
           }));
         }
 
-        // Atualizar a lista de chats
-        setChats((prevChats) =>
-          prevChats.map(chat =>
-            chat.id === selectedChat.id
+        setPendingChats((prevChats) =>
+          prevChats.map((chat) =>
+            chat.chatId === selectedChat.chatId
               ? { ...chat, messages: [...chat.messages, { sender: 'support', message: response }] }
               : chat
           )
         );
 
-        console.log(response)
+        setSelectedChat((prevChat) => prevChat ? {
+          ...prevChat,
+          messages: [...prevChat.messages, { sender: 'support', message: response }],
+        } : null);
 
-
-        // Atualizar o chat selecionado
-        if (selectedChat) {
-          setSelectedChat((prevChat) => ({
-            ...prevChat,
-            messages: [...prevChat.messages, { sender: 'support', message: response }]
-          }));
-        }
-
-        // Limpar o campo de resposta
         setResponse('');
       } catch (error) {
         console.error('Erro ao responder chat:', error);
@@ -137,27 +207,25 @@ function SupportDashboard() {
 
   const handleMarkAsResolved = async () => {
     if (selectedChat) {
+      const support_id = localStorage.getItem('userid');
+
       try {
-        // Marcar o chat como resolvido na API
-        await fetch(`http://localhost:5000/api/support/respond/${selectedChat.id}`, {
+        await fetch(`http://localhost:5000/api/support/updatestatuschat/${selectedChat.chatId}?status=2&support_id=${support_id}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
-          body: JSON.stringify({ response: 'Chat marcado como resolvido' })
+          body: JSON.stringify({ response: 'Chat marcado como resolvido' }),
         });
 
-        // Atualizar a lista de chats e adicionar à lista de chats resolvidos
-        setChats((prevChats) =>
-          prevChats.filter(chat => chat.id !== selectedChat.id)
-        );
-        setResolvedChats((prevChats) => [
-          ...prevChats,
-          { ...selectedChat, resolved: true }
-        ]);
+        // Remove o chat da lista de pendentes e de chats em andamento
+        setPendingChats((prevChats) => prevChats.filter((chat) => chat.chatId !== selectedChat.chatId));
+        setOnGoingChats((prevChats) => prevChats.filter((chat) => chat.chatId !== selectedChat.chatId));
 
-        // Desmarcar o chat selecionado e limpar o campo de resposta
+        // Adiciona o chat à lista de resolvidos
+        setResolvedChats((prevChats) => [...prevChats, { ...selectedChat, status: 2 }]);
+
         setSelectedChat(null);
         setResponse('');
       } catch (error) {
@@ -166,104 +234,85 @@ function SupportDashboard() {
     }
   };
 
-  // Função de Logout
-  const handleLogout = () => {
-    // Fechar conexão WebSocket, se ativa
-    if (ws) {
-      ws.close();
+  const startChat = async () => {
+    if (selectedChat) {
+      const support_id = localStorage.getItem('userid');
+
+      try {
+        await fetch(`http://localhost:5000/api/support/updatestatuschat/${selectedChat.chatId}?status=1&support_id=${support_id}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+          body: JSON.stringify({ response: 'Chat iniciado' }),
+        });
+
+        if (socketRef.current) {
+          socketRef.current.send(JSON.stringify({
+            chatId: selectedChat.chatId,
+            sender: 'support',
+            type: 'take_attendance',
+            support_id
+          }));
+        }
+
+        setPendingChats((prevChats) => prevChats.filter((chat) => chat.chatId !== selectedChat.chatId));
+        setOnGoingChats((prevChats) => [...prevChats, { ...selectedChat, status: 1 }]);
+
+        setSelectedChat(null);
+        setResponse('');
+      } catch (error) {
+        console.error('Erro ao iniciar chat:', error);
+      }
     }
+  };
 
-    // Remover o token de autenticação do localStorage
+  const handleLogout = () => {
+    if (socketRef.current) {
+      socketRef.current.close();
+    }
     localStorage.removeItem('token');
-
-    // Redirecionar para a página de login
-    window.location.href = '/login'; // Altere o caminho conforme necessário
+    window.location.href = '/login';
   };
 
   const getChatMessages = async (chat) => {
+    chat.chatId = chat.id > 0 ? chat.id : chat.chatId
     try {
-      const response = await fetch(`http://localhost:5000/api/support/chats/${chat.id}/messages`, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
+      const response = await fetch(`http://localhost:5000/api/support/chats/${chat.chatId}/messages`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       const messages = await response.json();
-      console.log(messages)
       setSelectedChat({ ...chat, messages });
     } catch (error) {
       console.error('Erro ao buscar mensagens do chat:', error);
     }
-  }
+  };
 
   return (
     <div className="dashboard-container">
-      <div className="header">
-        <h1>Dashboard de Suporte</h1>
-        <button onClick={handleLogout} className="logout-button">
-          Logout
-        </button>
-      </div>
-
+      <Header handleLogout={handleLogout} />
       <div className="main-content">
-        <div className="chat-list">
-          <h2>Chats Pendentes</h2>
-          <ul>
-            {chats.map((chat) => (
-              <li
-                key={chat.id}
-                className="chat-item chat-pending"
-                onClick={() => {
-                  setSelectedChat(chat);
-                }}
-              >
-                Conversa - {chat.client_id}
-              </li>
-            ))}
-          </ul>
-
-          <h2>Chats Respondidos</h2>
-          <ul>
-            {resolvedChats.map((chat) => (
-              <li
-                key={chat.id}
-                className="chat-item chat-resolved"
-                onClick={() => {
-                  getChatMessages(chat);
-                }}
-              >
-                Conversa - {chat.client_id}
-              </li>
-            ))}
-          </ul>
-        </div>
-
+        <ChatList
+          onGoingChats={onGoingChats}
+          pendingChats={pendingChats}
+          resolvedChats={resolvedChats}
+          setSelectedChat={setSelectedChat}
+          getChatMessages={getChatMessages}
+        />
         {selectedChat && (
-          <div className="chat-detail">
-            <h2>Chat {selectedChat.id}</h2>
-            <div className="messages">
-              {selectedChat.messages?.map((msg, index) => (
-                <div key={index} className={`message ${msg.sender}`}>
-                  {msg.message}
-                </div>
-              ))}
-            </div>
-
-            <div className="response-area">
-              <textarea
-                value={response}
-                onChange={(e) => setResponse(e.target.value)}
-                placeholder="Digite sua resposta"
-              />
-              <button onClick={handleRespond}>Responder</button>
-              {!selectedChat.resolved && (
-                <button onClick={handleMarkAsResolved}>Marcar como Respondido</button>
-              )}
-            </div>
-          </div>
+          <ChatDetail
+            selectedChat={selectedChat}
+            response={response}
+            setResponse={setResponse}
+            handleRespond={handleRespond}
+            handleMarkAsResolved={handleMarkAsResolved}
+            startChat={startChat}
+          />
         )}
       </div>
     </div>
   );
-}
+};
 
 export default SupportDashboard;

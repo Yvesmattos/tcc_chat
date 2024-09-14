@@ -28,7 +28,7 @@ const IdentificationForm = ({ onSubmit }) => {
       <div className="group-field">
         <label className="label-placeholder">Nome</label>
         <input
-          autoComplete="off"
+          // autoComplete="off"
           type="text"
           name="nome"
           placeholder="Nome"
@@ -39,7 +39,7 @@ const IdentificationForm = ({ onSubmit }) => {
       <div className="group-field">
         <label className="label-placeholder">E-mail</label>
         <input
-          autoComplete="off"
+          // autoComplete="off"
           type="email"
           name="email"
           placeholder="E-mail"
@@ -50,7 +50,7 @@ const IdentificationForm = ({ onSubmit }) => {
       <div className="group-field">
         <label className="label-placeholder">Telefone</label>
         <ReactInputMask
-          autoComplete="off"
+          // autoComplete="off"
           type="text"
           name="fone"
           value={formData.fone}

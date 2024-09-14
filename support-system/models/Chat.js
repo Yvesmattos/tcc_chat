@@ -12,9 +12,13 @@ const Chat = sequelize.define('Chat', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  resolved: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false
+  responsible_support: {
+    type: DataTypes.INTEGER,
+    allowNull: true
+  },
+  status: {
+    type: DataTypes.TINYINT,
+    defaultValue: 0
   },
   timestarted: {
     type: DataTypes.DATE, // Usando DATE para timestamps

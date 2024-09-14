@@ -8,44 +8,96 @@ const router = express.Router();
 // Middleware de autenticação
 router.use(authMiddleware);
 
-// Listar atendimentos pendentes
-router.get('/chats', async (req, res) => {
+// Adiciona a mensagem à fila
+const messageQueue = [];
+const insertMessages = async () => {
+  if (messageQueue.length > 0) {
+    const messagesToInsert = [...messageQueue];
+    messageQueue.length = 0; // Limpa a fila
+
+    try {
+      // Mapear a fila de mensagens para um formato compatível com o Sequelize
+      const values = messagesToInsert.map(msg => ({
+        message: msg.message,
+        sender: msg.sender,
+        sender_id: msg.sender_id,
+        timesend: new Date(msg.timesend),
+        chat_id: msg.chat_id,
+      }));
+
+      // Inserir as mensagens em massa no banco de dados
+      await Message.bulkCreate(values);
+
+      console.log('Mensagens inseridas com sucesso');
+    } catch (error) {
+      console.error('Erro ao inserir mensagens:', error);
+    }
+  }
+};
+
+
+// Configura um intervalo para inserir mensagens a cada 5 segundos
+setInterval(insertMessages, 5000);
+
+// Nova rota para receber mensagens
+router.post('/messages', async (req, res) => {
   try {
-    const chats = await Chat.findAll({ where: { resolved: false } });
-    res.json(chats);
+    const messages = req.body; // Assume que req.body é um array de mensagens
+
+    console.log(req.body)
+
+    if (Array.isArray(messages) && messages.every(msg => msg.message && msg.sender && msg.sender_id && msg.timesend && msg.chat_id)) {
+      messageQueue.push(...messages); // Adiciona todas as mensagens na fila
+      res.status(200).send('Mensagens recebidas');
+    } else {
+      res.status(400).send('Dados inválidos');
+    }
   } catch (error) {
-    res.status(500).send('Erro ao listar chats');
+    res.status(500).send('Erro ao receber mensagens');
   }
 });
 
-// Responder atendimento
-router.post('/respond/:id', async (req, res) => {
+
+// Resto do código da API...
+// Atualizar status do chat
+router.post('/updateStatusChat/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { response } = req.body;
+    const { status, support_id } = req.query;
+
     const chat = await Chat.findByPk(id);
     if (!chat) {
       return res.status(404).send('Chat não encontrado');
     }
-    chat.resolved = true;
+    chat.status = status;
+    chat.responsible_support = support_id;
+
     await chat.save();
-    res.send('Resposta enviada com sucesso!');
+    res.send('Status atualizado com sucesso!');
   } catch (error) {
     res.status(500).send('Erro ao responder chat');
   }
 });
 
-// Rota para obter chats respondidos
-router.get('/resolved-chats', async (req, res) => {
+// Obter chats
+router.get('/chats/', async (req, res) => {
+  const { support_id, status } = req.query;
+
+  let where = { status: 0 };
+
+  if (status == 1 || status == 2) {
+    where.status = status;
+    where.responsible_support = support_id;
+  }
   try {
-    const chats = await Chat.findAll({ where: { resolved: true } });
+    const chats = await Chat.findAll({ where: where });
     res.json(chats);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// Rota para obter mensagens de um chat específico
+// Obter mensagens de um chat específico
 router.get('/chats/:id/messages', async (req, res) => {
   try {
     const { id } = req.params;
@@ -59,16 +111,16 @@ router.get('/chats/:id/messages', async (req, res) => {
   }
 });
 
+// Iniciar chat
 router.post('/chats', async (req, res) => {
   try {
-    const { client_id } = req.body;
-    let chat = new Chat()
-    chat.client_id = "vel01"; //alterar
-    chat.resolved = 0;
+    const { clientIdentify } = req.body;
+    let chat = new Chat();
+    chat.client_id = "vel01-" + clientIdentify; //alterar
+    chat.status = 0;
     chat.timestarted = '2024-09-01 14:16:59';
-    console.log(chat)
-    await chat.save();
-    res.send('Chat iniciado');
+    const response = await chat.save();
+    res.send({ id: response.dataValues.id });
   } catch (error) {
     res.status(500).send('Erro ao iniciar chat');
   }

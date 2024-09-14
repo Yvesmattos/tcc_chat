@@ -2,8 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../api/api';
-
-import './Login.css'; // Importando o CSS
+import './Login.css';
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -14,6 +13,8 @@ function Login() {
         e.preventDefault();
         try {
             const response = await login(username, password);
+            localStorage.setItem('username', response.data.userfullname);
+            localStorage.setItem('userid', response.data.id);
             localStorage.setItem('token', response.data.token);
             navigate('/dashboard');
         } catch (error) {

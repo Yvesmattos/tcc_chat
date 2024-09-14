@@ -21,7 +21,7 @@ class ChatService:
     #     return ' '.join(tokens)
 
     def get_resposta(self, pergunta_usuario):
-        with open("C:/Users/ymattos/OneDrive/Área de Trabalho/Paralel TCC/ia-backend/app/files/faq.json", 'r', encoding='utf-8') as f:
+        with open("C:/Users/ymattos/OneDrive/Área de Trabalho/tcc_chat_real/ia-backend/app/files/faq.json", 'r', encoding='utf-8') as f:
         # with open("C:/Users/pizza/Desktop/ProjetosPython/tcc_chat/ia-backend/app/files/faq.json", 'r', encoding='utf-8') as f:
             faq = json.load(f)
         

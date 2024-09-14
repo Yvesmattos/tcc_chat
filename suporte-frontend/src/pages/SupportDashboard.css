@@ -139,6 +139,10 @@
   background-color: #e0e0e0;
 }
 
+.chat-started {
+  background-color: rgba(191, 175, 57, 0.555);
+}
+
 .chat-pending {
   background-color: rgba(255, 74, 74, 0.555);
 }
@@ -164,4 +168,55 @@ h2 {
   font-size: 16px;
   margin-bottom: 10px;
   color: #555;
+}
+
+/* Container do dropdown */
+.dropdown-container {
+  margin-bottom: 10px;
+}
+
+/* Título do dropdown */
+.dropdown-title {
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  transition: background-color 0.3s;
+}
+
+.dropdown-title:hover {
+  background-color: #0056b3;
+}
+
+/* Lista do dropdown */
+.dropdown-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  max-height: 200px; /* Limita a altura da lista */
+  overflow-y: auto; /* Adiciona rolagem se necessário */
+}
+
+/* Itens da lista */
+.chat-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.chat-item:last-child {
+  border-bottom: none;
+}
+
+.chat-item:hover {
+  background-color: #e0e0e0;
 }

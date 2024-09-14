@@ -15,39 +15,13 @@ const ChatModal = () => {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [ws, setWs] = useState(null);
-  const [chatId] = useState(`chatId-${Date.now()}`); // Gerar um ID único para o suporte
-
-
+  const [chatId, setChatId] = useState(null);
+  const [clientData, setClientData] = useState({ name: "", email: "", telephone: "" })
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
-  useEffect(() => {
-    if (open) {
-      // Conectar ao WebSocket
-      const socket = new WebSocket('ws://localhost:8080');
-      setWs(socket);
-
-      // Quando uma mensagem é recebida do WebSocket
-      socket.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        if (data.sender === 'support') {
-          setMessages((prevMessages) => [...prevMessages, { type: 'assistant', text: data.message }]);
-        }
-      };
-
-      // Identificar como cliente
-      socket.onopen = () => {
-        socket.send(JSON.stringify({ chatId, type: 'identify', userType: 'client' }));
-      };
-
-      return () => {
-        socket.close();
-      };
-    }
-  }, [open, isHumanSupport, chatId]);
 
   useEffect(() => {
     scrollToBottom();
@@ -65,12 +39,35 @@ const ChatModal = () => {
 
   const handleClose = () => setOpen(false);
 
+  const connectWebSocket = (chatIdAux) => {
+    const socket = new WebSocket('ws://localhost:8080');
+    setWs(socket);
+
+    // Identificar como cliente ao conectar usando o chatId
+    socket.onopen = () => {
+      socket.send(JSON.stringify({ type: 'identify', userType: 'client', clientData, chatId: chatIdAux }));
+    };
+
+    // Quando uma mensagem é recebida do WebSocket
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.sender === 'support') {
+        setMessages((prevMessages) => [...prevMessages, { type: 'assistant', text: data.message }]);
+      }
+    };
+
+    // Fechar a conexão WebSocket quando o componente for desmontado ou quando o suporte é encerrado
+    socket.onclose = () => {
+      setWs(null);
+    };
+  };
+
   const handleSendMessage = async () => {
     if (isHumanSupport) {
       setMessages((prevMessages) => [...prevMessages, { type: 'user', text: inputValue }]);
       setInputValue('');
       if (ws) {
-        ws.send(JSON.stringify({ chatId, type: 'message', message: inputValue }));
+        ws.send(JSON.stringify({ type: 'client_message', message: inputValue, clientIdentify: clientData.email, chatId }));
       }
     } else {
       const newMessage = { type: 'user', text: inputValue };
@@ -78,6 +75,7 @@ const ChatModal = () => {
       setInputValue('');
       setLoading(true); // Set loading to true when sending a message
 
+      // Simulação de resposta (API desativada no momento)
       // const response = await fetch('http://127.0.0.1:8085/chat/send_question', {
       //   method: 'POST',
       //   headers: {
@@ -88,7 +86,7 @@ const ChatModal = () => {
 
       // const data = await response.json();
       // const resposta = data[0].resposta;
-      // console.log(resposta)
+
       // setMessages((prevMessages) => [...prevMessages, { type: 'assistant', text: resposta }]);
       setLoading(false); // Set loading to false when response is received
       setAwaitingFeedback(true);
@@ -101,23 +99,36 @@ const ChatModal = () => {
       setAwaitingFeedback(false);
       setIsHumanSupport(false);
     } else {
-      console.log("entrou")
-      await fetch(`http://localhost:5000/api/support/chats`, {
+      const response = await fetch(`http://localhost:5000/api/support/chats`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        body: JSON.stringify({ response: '' })
+        body: JSON.stringify({ clientIdentify: clientData.email }) // Envia o chatId único
       });
+
+      const data = await response.json();
+      setChatId(data.id)
 
       setMessages((prevMessages) => [...prevMessages, { type: 'system', text: 'Transferindo para um atendente humano...' }]);
       setAwaitingFeedback(false);
       setIsHumanSupport(true);
+
+      // Iniciar a conexão com o WebSocket somente agora
+      connectWebSocket(data.id);
     }
   };
 
   const handleFormSubmit = (data) => {
+    const updatedClientData = {
+      ...clientData,
+      name: data.nome,
+      email: data.email,
+      telephone: data.fone,
+    };
+
+    setClientData(updatedClientData); // Atualiza o estado com o novo objeto
     setMessages((prevMessages) => [
       ...prevMessages,
       { type: 'system', text: `Informações recebidas: <br>Nome - ${data.nome}, <br>Email - ${data.email}, <br>Telefone - ${data.fone}` },
