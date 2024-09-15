@@ -64,7 +64,7 @@ const SupportDashboard = () => {
   }, [messageQueue]);
 
   const handleWebSocketMessage = useCallback((event) => {
-    const { sender, message, chatId, type, support_id } = JSON.parse(event.data);
+    const { sender, message, chatId, type, support_id, clientIdentify } = JSON.parse(event.data);
 
     if (type === 'attendance_confirmed') {
       const currentSupportId = localStorage.getItem('userid'); // Suporte atual
@@ -79,13 +79,16 @@ const SupportDashboard = () => {
       setPendingChats((prevChats) => prevChats.filter((chat) => chat.chatId !== chatId));
       console.log(`Chat ${chatId} removido da lista de pendentes para este suporte.`);
     } else {
-      const newMessage = { sender, sender_id: `vel01-teste`, message, timesend: new Date().toISOString().slice(0, 19).replace('T', ' '), chat_id: chatId };
+      console.log(event)
+      const newMessage = { sender, sender_id: `vel01-${clientIdentify}`, message, timesend: new Date().toISOString().slice(0, 19).replace('T', ' '), chat_id: chatId };
 
       // Adiciona a mensagem à fila
       setMessageQueue((prevQueue) => [...prevQueue, newMessage]);
 
       const updateChatList = (prevChats) => {
         const chatIndex = prevChats.findIndex((chat) => chat.chatId === chatId);
+
+      //adicionando mensagem em chat que já existe na lista
         if (chatIndex !== -1) {
           const updatedChats = [...prevChats];
           updatedChats[chatIndex] = {
