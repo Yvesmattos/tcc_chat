@@ -5,7 +5,7 @@ const Header = ({ handleLogout }) => {
   return (
     <div className="header">
       <h1>Dashboard de Suporte</h1>
-      {support_username}
+      <span><b>Suporte Conectado:</b> {support_username}</span>
       <button onClick={handleLogout} className="logout-button">
         Logout
       </button>
