@@ -58,13 +58,13 @@ const SupportDashboard = () => {
           console.error('Erro ao enviar mensagens para o backend:', error);
         }
       }
-    }, 10000); // Enviar a cada 10 segundos
+    }, 1000); // Enviar a cada 10 segundos
 
     return () => clearInterval(interval);
   }, [messageQueue]);
 
   const handleWebSocketMessage = useCallback((event) => {
-    const { sender, message, chatId, type, support_id, clientIdentify } = JSON.parse(event.data);
+    const { sender, message, chatId, type, support_id } = JSON.parse(event.data);
 
     if (type === 'attendance_confirmed') {
       const currentSupportId = localStorage.getItem('userid'); // Suporte atual
@@ -80,7 +80,7 @@ const SupportDashboard = () => {
       console.log(`Chat ${chatId} removido da lista de pendentes para este suporte.`);
     } else {
       console.log(event)
-      const newMessage = { sender, sender_id: `vel01-${clientIdentify}`, message, timesend: new Date().toISOString().slice(0, 19).replace('T', ' '), chat_id: chatId };
+      const newMessage = { sender, message, timesend: new Date().toISOString().slice(0, 19).replace('T', ' '), chat_id: chatId };
 
       // Adiciona a mensagem à fila
       setMessageQueue((prevQueue) => [...prevQueue, newMessage]);
@@ -170,7 +170,6 @@ const SupportDashboard = () => {
       const messageData = {
         message: response,
         sender: 'support',
-        sender_id: localStorage.getItem('userid'),
         timesend: "2024-09-01 17:16:59", // ajustar
         chat_id: selectedChat.chatId,
       };

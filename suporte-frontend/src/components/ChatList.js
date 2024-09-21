@@ -27,7 +27,7 @@ const ChatList = ({ onGoingChats, pendingChats, resolvedChats, setSelectedChat, 
                 className="chat-item chat-pending"
                 onClick={() => { setSelectedChat(chat); getChatMessages(chat) }}
               >
-                {chat.id > 0 ? chat.id : chat.chatId} - {chat.client_id}
+                {chat.id > 0 ? chat.id : chat.chatId}
               </li>
             ))}
           </ul>

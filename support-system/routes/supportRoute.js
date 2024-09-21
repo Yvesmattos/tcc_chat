@@ -1,6 +1,5 @@
 const express = require('express');
-const Chat = require('../models/Chat');
-const Message = require('../models/Message'); // Importar o modelo de Message
+const { Chat, Client, Message } = require('../models');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = express.Router();
@@ -10,7 +9,7 @@ router.use(authMiddleware);
 
 // Adiciona a mensagem à fila
 const messageQueue = [];
-const insertMessages = async () => {
+insertMessages = async () => {
   if (messageQueue.length > 0) {
     const messagesToInsert = [...messageQueue];
     messageQueue.length = 0; // Limpa a fila
@@ -20,8 +19,7 @@ const insertMessages = async () => {
       const values = messagesToInsert.map(msg => ({
         message: msg.message,
         sender: msg.sender,
-        sender_id: msg.sender_id,
-        timesend: new Date(msg.timesend),
+        time_send: new Date(msg.timesend),
         chat_id: msg.chat_id,
       }));
 
@@ -46,7 +44,7 @@ router.post('/messages', async (req, res) => {
 
     console.log(req.body)
 
-    if (Array.isArray(messages) && messages.every(msg => msg.message && msg.sender && msg.sender_id && msg.timesend && msg.chat_id)) {
+    if (Array.isArray(messages) && messages.every(msg => msg.message && msg.sender && msg.time_send && msg.chat_id)) {
       messageQueue.push(...messages); // Adiciona todas as mensagens na fila
       res.status(200).send('Mensagens recebidas');
     } else {
@@ -70,7 +68,7 @@ router.post('/updateStatusChat/:id', async (req, res) => {
       return res.status(404).send('Chat não encontrado');
     }
     chat.status = status;
-    chat.responsible_support = support_id;
+    chat.support_id = support_id;
 
     await chat.save();
     res.send('Status atualizado com sucesso!');
@@ -87,10 +85,17 @@ router.get('/chats/', async (req, res) => {
 
   if (status == 1 || status == 2) {
     where.status = status;
-    where.responsible_support = support_id;
+    where.support_id = support_id;
   }
   try {
-    const chats = await Chat.findAll({ where: where });
+    const chats = await Chat.findAll(
+      {
+        where,
+        include: {
+          model: Client,
+          attributes: ["fullname"]
+        }
+      },);
     res.json(chats);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -114,11 +119,12 @@ router.get('/chats/:id/messages', async (req, res) => {
 // Iniciar chat
 router.post('/chats', async (req, res) => {
   try {
-    const { clientIdentify } = req.body;
+    const { client_id } = req.body;
+
     let chat = new Chat();
-    chat.client_id = "vel01-" + clientIdentify; //alterar
+    console.log(chat)
+    chat.client_id = client_id; //alterar
     chat.status = 0;
-    chat.timestarted = '2024-09-01 14:16:59';
     const response = await chat.save();
     res.send({ id: response.dataValues.id });
   } catch (error) {

@@ -30,10 +30,11 @@ const IdentificationForm = ({ onSubmit }) => {
         <input
           // autoComplete="off"
           type="text"
-          name="nome"
+          name="name"
           placeholder="Nome"
-          value={formData.nome}
+          value={formData.name}
           onChange={handleChange}
+          // required={true}
         />
       </div>
       <div className="group-field">
@@ -45,6 +46,7 @@ const IdentificationForm = ({ onSubmit }) => {
           placeholder="E-mail"
           value={formData.email}
           onChange={handleChange}
+          // required={true}
         />
       </div>
       <div className="group-field">
@@ -52,6 +54,7 @@ const IdentificationForm = ({ onSubmit }) => {
         <ReactInputMask
           // autoComplete="off"
           type="text"
+          // required={true}
           name="fone"
           value={formData.fone}
           onChange={handleChange}
