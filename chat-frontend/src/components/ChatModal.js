@@ -76,18 +76,18 @@ const ChatModal = () => {
       setLoading(true); // Set loading to true when sending a message
 
       // Simulação de resposta (API desativada no momento)
-      // const response = await fetch('http://127.0.0.1:8085/chat/send_question', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({ pergunta: inputValue })
-      // });
+      const response = await fetch('http://127.0.0.1:8085/chat/send_question', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ pergunta: inputValue })
+      });
 
-      // const data = await response.json();
-      // const resposta = data[0].resposta;
+      const data = await response.json();
+      const resposta = data[0].resposta;
 
-      // setMessages((prevMessages) => [...prevMessages, { type: 'assistant', text: resposta }]);
+      setMessages((prevMessages) => [...prevMessages, { type: 'assistant', text: resposta }]);
       setLoading(false); // Set loading to false when response is received
       setAwaitingFeedback(true);
     }
