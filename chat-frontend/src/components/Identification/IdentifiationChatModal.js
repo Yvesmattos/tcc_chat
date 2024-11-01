@@ -33,8 +33,8 @@ const IdentificationForm = ({ onSubmit }) => {
           name="name"
           placeholder="Nome"
           value={formData.name}
-          onChange={handleChange}
-          // required={true}
+          onChange={() => handleChange}
+        // required={true}
         />
       </div>
       <div className="group-field">
@@ -46,7 +46,7 @@ const IdentificationForm = ({ onSubmit }) => {
           placeholder="E-mail"
           value={formData.email}
           onChange={handleChange}
-          // required={true}
+        // required={true}
         />
       </div>
       <div className="group-field">

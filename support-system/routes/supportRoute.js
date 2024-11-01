@@ -1,5 +1,5 @@
 const express = require('express');
-const { Chat, Client, Message } = require('../models');
+const { Chat, Client, Message, Ticket } = require('../models');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = express.Router();
@@ -35,7 +35,7 @@ insertMessages = async () => {
 
 
 // Configura um intervalo para inserir mensagens a cada 5 segundos
-setInterval(insertMessages, 5000);
+setInterval(insertMessages, 2000);
 
 // Nova rota para receber mensagens
 router.post('/messages', async (req, res) => {
@@ -44,7 +44,7 @@ router.post('/messages', async (req, res) => {
 
     console.log(req.body)
 
-    if (Array.isArray(messages) && messages.every(msg => msg.message && msg.sender && msg.time_send && msg.chat_id)) {
+    if (Array.isArray(messages) && messages.every(msg => msg.message && msg.sender && msg.timesend && msg.chat_id)) {
       messageQueue.push(...messages); // Adiciona todas as mensagens na fila
       res.status(200).send('Mensagens recebidas');
     } else {
@@ -125,6 +125,22 @@ router.post('/chats', async (req, res) => {
     console.log(chat)
     chat.client_id = client_id; //alterar
     chat.status = 0;
+    const response = await chat.save();
+    res.send({ id: response.dataValues.id });
+  } catch (error) {
+    res.status(500).send('Erro ao iniciar chat');
+  }
+});
+
+// Cadastrar ticket
+router.post('/tickets', async (req, res) => {
+  try {
+    const { subject, chat_id } = req.body;
+
+    let chat = new Ticket();
+    chat.resolved = 0;
+    chat.subject = subject;
+    chat.chat_id = chat_id;
     const response = await chat.save();
     res.send({ id: response.dataValues.id });
   } catch (error) {

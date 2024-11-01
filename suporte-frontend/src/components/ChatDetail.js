@@ -7,7 +7,8 @@ const ChatDetail = ({
   setResponse,
   handleRespond,
   handleMarkAsResolved,
-  startChat
+  startChat,
+  handleTicket
 }) => {
   return (
     <div className="chat-detail">
@@ -25,6 +26,7 @@ const ChatDetail = ({
         handleRespond={handleRespond}
         status={selectedChat.status}
         handleMarkAsResolved={handleMarkAsResolved}
+        handleTicket={handleTicket}
       />
       {selectedChat.status === 0 && (
         <>

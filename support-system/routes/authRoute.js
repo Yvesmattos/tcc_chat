@@ -27,7 +27,6 @@ router.post('/login', async (req, res) => {
       return res.status(400).send('Credenciais inválidas');
     }
     const token = jwt.sign({ id: support.id }, 'secrect', { expiresIn: '12h' });
-    console.log(support.id)
     res.json({ token, id: support.id, userfullname: support.firstname + " " + support.lastname });
   } catch (error) {
     res.status(500).send('Erro ao realizar login');

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useReducer } from 'react';
 import './SupportDashboard.css';
 import Header from '../components/Header';
 import ChatDetail from '../components/ChatDetail';
@@ -12,6 +12,13 @@ const SupportDashboard = () => {
   const [response, setResponse] = useState('');
   const [messageQueue, setMessageQueue] = useState([]);
   const socketRef = useRef(null);
+
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+
+  setInterval(() => {
+    // alert('e')
+    forceUpdate();
+  }, 1000);
 
   // Função para inicializar o WebSocket
   const initializeWebSocket = useCallback(() => {
@@ -58,7 +65,7 @@ const SupportDashboard = () => {
           console.error('Erro ao enviar mensagens para o backend:', error);
         }
       }
-    }, 1000); // Enviar a cada 10 segundos
+    }, 2000); // Enviar a cada 10 segundos
 
     return () => clearInterval(interval);
   }, [messageQueue]);
@@ -88,7 +95,7 @@ const SupportDashboard = () => {
       const updateChatList = (prevChats) => {
         const chatIndex = prevChats.findIndex((chat) => chat.chatId === chatId);
 
-      //adicionando mensagem em chat que já existe na lista
+        //adicionando mensagem em chat que já existe na lista
         if (chatIndex !== -1) {
           const updatedChats = [...prevChats];
           updatedChats[chatIndex] = {
@@ -291,6 +298,23 @@ const SupportDashboard = () => {
     }
   };
 
+  const handleTicket = async (e) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/support/tickets/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({ subject: e.subject, chat_id: selectedChat.chatId }),
+      });
+
+      console.log(response)
+    } catch (error) {
+      console.error('Erro ao marcar chat como resolvido:', error);
+    }
+  }
+
   return (
     <div className="dashboard-container">
       <Header handleLogout={handleLogout} />
@@ -310,6 +334,7 @@ const SupportDashboard = () => {
             handleRespond={handleRespond}
             handleMarkAsResolved={handleMarkAsResolved}
             startChat={startChat}
+            handleTicket={handleTicket}
           />
         )}
       </div>

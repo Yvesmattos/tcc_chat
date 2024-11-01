@@ -64,18 +64,30 @@ const ChatModal = () => {
 
   const handleSendMessage = async () => {
     if (isHumanSupport) {
-      setMessages((prevMessages) => [...prevMessages, { type: 'user', text: inputValue }]);
+      const newMessage = { type: 'user', text: inputValue };
+      setMessages((prevMessages) => {
+        const updatedMessages = [...prevMessages, newMessage];
+        localStorage.setItem('chatHistory', JSON.stringify(updatedMessages)); // Salva no localStorage
+        return updatedMessages;
+      });
+  
       setInputValue('');
+  
       if (ws) {
         ws.send(JSON.stringify({ type: 'client_message', message: inputValue, clientIdentify: clientData.email, chatId }));
       }
     } else {
       const newMessage = { type: 'user', text: inputValue };
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
+      setMessages((prevMessages) => {
+        const updatedMessages = [...prevMessages, newMessage];
+        localStorage.setItem('chatHistory', JSON.stringify(updatedMessages)); // Salva no localStorage
+        return updatedMessages;
+      });
+  
       setInputValue('');
-      setLoading(true); // Set loading to true when sending a message
-
-      // Simulação de resposta (API desativada no momento)
+      setLoading(true);
+  
+      // Simulação de resposta
       const response = await fetch('http://127.0.0.1:8085/chat/send_question', {
         method: 'POST',
         headers: {
@@ -83,12 +95,17 @@ const ChatModal = () => {
         },
         body: JSON.stringify({ pergunta: inputValue })
       });
-
+  
       const data = await response.json();
       const resposta = data[0].resposta;
-
-      setMessages((prevMessages) => [...prevMessages, { type: 'assistant', text: resposta }]);
-      setLoading(false); // Set loading to false when response is received
+  
+      setMessages((prevMessages) => {
+        const updatedMessages = [...prevMessages, { type: 'assistant', text: resposta }];
+        localStorage.setItem('chatHistory', JSON.stringify(updatedMessages)); // Salva no localStorage com a resposta
+        return updatedMessages;
+      });
+  
+      setLoading(false);
       setAwaitingFeedback(true);
     }
   };
@@ -109,8 +126,6 @@ const ChatModal = () => {
       });
 
       const data1 = await response1.json();
-
-      console.log(data1.id)
 
       if (data1.id) {
         const response2 = await fetch(`http://localhost:5000/api/support/chats`, {
@@ -151,6 +166,16 @@ const ChatModal = () => {
     ]);
     setIsFormSubmitted(true);
   };
+
+  useEffect(() => {
+    const storedMessages = localStorage.getItem('chatHistory');
+
+    if (storedMessages) {
+      setIsFormSubmitted(true)
+      const parsedMessages = JSON.parse(storedMessages); // Converte para array de mensagens
+      setMessages((prevMessages) => [...prevMessages, ...parsedMessages]); // Adiciona as mensagens ao estado
+    }
+  }, []); // Executa apenas uma vez quando o componente é montado
 
   return (
     <div>
