@@ -4,6 +4,8 @@ import Header from '../components/Header';
 import ChatDetail from '../components/ChatDetail';
 import ChatList from '../components/ChatList';
 
+
+
 const SupportDashboard = () => {
   const [selectedChat, setSelectedChat] = useState(null);
   const [pendingChats, setPendingChats] = useState([]);
@@ -23,7 +25,7 @@ const SupportDashboard = () => {
   // Função para inicializar o WebSocket
   const initializeWebSocket = useCallback(() => {
     if (!socketRef.current) {
-      socketRef.current = new WebSocket('ws://localhost:8080');
+      socketRef.current = new WebSocket(process.env.REACT_APP_API_URL_WS);
 
       socketRef.current.onopen = () => {
         console.log('connected');
@@ -50,7 +52,7 @@ const SupportDashboard = () => {
     const interval = setInterval(async () => {
       if (messageQueue.length > 0) {
         try {
-          await fetch('http://localhost:5000/api/support/messages', {
+          await fetch(`${process.env.REACT_APP_API_URL_API_IA}/api/support/messages`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -141,10 +143,8 @@ const SupportDashboard = () => {
   const fetchChats = useCallback(async (status) => {
     const support_id = localStorage.getItem('userid');
 
-    console.log(support_id);
-
     try {
-      const response = await fetch(`http://localhost:5000/api/support/chats?status=${status}&support_id=${support_id}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL_API_IA}/api/support/chats?status=${status}&support_id=${support_id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       return await response.json();
@@ -219,7 +219,7 @@ const SupportDashboard = () => {
       const support_id = localStorage.getItem('userid');
 
       try {
-        await fetch(`http://localhost:5000/api/support/updatestatuschat/${selectedChat.chatId}?status=2&support_id=${support_id}`, {
+        await fetch(`${process.env.REACT_APP_API_URL_API_IA}/api/support/updatestatuschat/${selectedChat.chatId}?status=2&support_id=${support_id}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -248,7 +248,7 @@ const SupportDashboard = () => {
       const support_id = localStorage.getItem('userid');
 
       try {
-        await fetch(`http://localhost:5000/api/support/updatestatuschat/${selectedChat.chatId}?status=1&support_id=${support_id}`, {
+        await fetch(`${process.env.REACT_APP_API_URL_API_IA}/api/support/updatestatuschat/${selectedChat.chatId}?status=1&support_id=${support_id}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -288,7 +288,7 @@ const SupportDashboard = () => {
   const getChatMessages = async (chat) => {
     chat.chatId = chat.id > 0 ? chat.id : chat.chatId
     try {
-      const response = await fetch(`http://localhost:5000/api/support/chats/${chat.chatId}/messages`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL_API_IA}/api/support/chats/${chat.chatId}/messages`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       const messages = await response.json();
@@ -300,7 +300,7 @@ const SupportDashboard = () => {
 
   const handleTicket = async (e) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/support/tickets/`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL_API_IA}/api/support/tickets/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
