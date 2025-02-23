@@ -1,0 +1,44 @@
+/* src/components/ChatMessage.css */
+
+.container-message-user {
+  text-align: right;
+}
+
+.container-message-system,
+.container-message-assistant {
+  text-align: left;
+}
+
+.chat-message {
+  margin: 10px 0;
+  padding: 6px 8px;
+  border-radius: 8px;
+  max-width: 80%;
+  min-width: 40%;
+  min-height: 10px;
+  word-wrap: break-word;
+  font-size: 18px;
+}
+
+.chat-message p {
+  margin: 0;
+}
+
+.chat-message.user {
+  background-color: #666f7a;
+  color: white;
+  text-align: right;
+  display: inline-block;
+}
+
+.chat-message.assistant {
+  background-color: #f0f0f0;
+  text-align: left;
+  display: inline-block;
+}
+
+.chat-message.system {
+  background-color: #f0f0f0;
+  display: inline-block;
+  text-align: left;
+}

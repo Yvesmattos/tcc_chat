@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.body) {  // Verifica se document.body não é null
+                const chatFrame = document.createElement('iframe');
+                chatFrame.id = 'chat-frame';
+                chatFrame.src = 'http://localhost:3001/';
+                chatFrame.title = 'Chat App';
+                chatFrame.style.position = 'fixed';
+                chatFrame.style.bottom = '0';
+                chatFrame.style.right = '0';
+                chatFrame.style.width = '100vw';
+                chatFrame.style.height = '100vh';
+                chatFrame.style.border = 'none';
+                chatFrame.style.zIndex = '9999'; // Garante que o iframe está acima de outros conteúdos
+                document.body.appendChild(chatFrame);
+            }
+        });
+    </script>
+</body>
+
+</html>
