@@ -2,7 +2,7 @@
 import React from 'react';
 import './ChatInput.css';
 
-const ChatInput = ({ inputValue, setInputValue, handleSendMessage, loading }) => {
+const ChatInput = ({ inputValue, setInputValue, handleSendMessage, loading, disabled }) => {
   const handleKeyPress = (event) => {
     if (event.key === 'Enter' && !event.ctrlKey) {
       event.preventDefault(); // Evitar que a nova linha seja adicionada
@@ -20,7 +20,7 @@ const ChatInput = ({ inputValue, setInputValue, handleSendMessage, loading }) =>
         disabled={loading}
         placeholder="Digite sua mensagem..."
       />
-      <button onClick={handleSendMessage} disabled={loading}>Enviar</button> {/* Disable button when loading is true */}
+      <button onClick={handleSendMessage} disabled={loading || disabled }>Enviar</button> {/* Disable button when loading is true */}
     </div>
   );
 };

@@ -15,6 +15,7 @@ const ChatModal = () => {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [ws, setWs] = useState(null);
+  const [isChatClosed, setIsChatClosed] = useState(false);
   const [chatId, setChatId] = useState(null);
   const [clientData, setClientData] = useState({
     fullname: "",
@@ -49,6 +50,20 @@ const ChatModal = () => {
 
   const handleClose = () => setOpen(false);
 
+  const handleFinish = () => {
+    localStorage.setItem("isChatActive", "false");
+    localStorage.removeItem("chatHistory");
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { type: "system", text: "Obrigado! O chat foi encerrado." },
+    ]);
+    setAwaitingFeedback(false);
+    setIsHumanSupport(false);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  };
+
   const connectWebSocket = (chatIdAux) => {
     // const socket = new WebSocket("wss://ws_chat.serveo.net");
     const socket = new WebSocket("ws://localhost:8080");
@@ -74,6 +89,21 @@ const ChatModal = () => {
           ...prevMessages,
           { type: "assistant", text: data.message },
         ]);
+
+        // Verifica se a mensagem é de encerramento
+        if (data.message === "Este chat foi encerrado") {
+          setIsChatClosed(true);
+          if (ws) {
+            ws.close();
+          }
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            {
+              type: "system",
+              text: "Você não pode mais enviar mensagens. Caso precise de atendimento, inicie um novo chat.",
+            },
+          ]);
+        }
       }
     };
 
@@ -129,7 +159,20 @@ const ChatModal = () => {
       );
 
       const data = await response.json();
-      const resposta = data[0].resposta;
+
+      // Encontra o item com a maior similaridade
+      const bestMatch = data.reduce((prev, current) =>
+        prev.similaridade_maxima > current.similaridade_maxima ? prev : current
+      );
+
+      // Verifica se a similaridade máxima é suficiente
+      let resposta;
+      if (bestMatch.similaridade_maxima >= 0.6) {
+        resposta = bestMatch.resposta;
+      } else {
+        resposta = "Refaça a pergunta com outras palavras";
+      }
+      console.log(data);
 
       setMessages((prevMessages) => {
         const updatedMessages = [
@@ -197,6 +240,7 @@ const ChatModal = () => {
         setMessages((prevMessages) => [
           ...prevMessages,
           { type: "system", text: "Transferindo para um atendente humano..." },
+          { type: "system", text: "Digite sua pergunta..." },
         ]);
         setAwaitingFeedback(false);
         setIsHumanSupport(true);
@@ -230,7 +274,10 @@ const ChatModal = () => {
 
   useEffect(() => {
     const isChatActive = localStorage.getItem("isChatActive");
-    if (isChatActive) {
+    const isReload =
+      performance.navigation.type === performance.navigation.TYPE_RELOAD;
+
+    if (isChatActive && isReload) {
       const storedMessages = localStorage.getItem("chatHistory");
 
       if (storedMessages) {
@@ -269,11 +316,24 @@ const ChatModal = () => {
               />
               <h2 style={{ color: "white", fontWeight: "bold" }}>IAtendente</h2>
             </div>
-            <button className="close-button" onClick={handleClose}>
-              <span title="Minimizar" style={{ fontWeight: 900 }}>
-                _
-              </span>
-            </button>
+            <div>
+              <button className="close-button" onClick={handleFinish}>
+                <span
+                  title="Minimizar"
+                  style={{ fontWeight: 900, color: "#f97a7a", paddingRight: 5 }}
+                >
+                  X
+                </span>
+              </button>
+              <button className="close-button" onClick={handleClose}>
+                <span
+                  title="Minimizar"
+                  style={{ fontWeight: 900, fontSize: 20 }}
+                >
+                  -
+                </span>
+              </button>
+            </div>
           </div>
           <div className="chat-modal-content">
             <div
@@ -299,7 +359,8 @@ const ChatModal = () => {
                     inputValue={inputValue}
                     setInputValue={setInputValue}
                     handleSendMessage={handleSendMessage}
-                    loading={loading} // Pass loading state to ChatInput
+                    loading={loading}
+                    disabled={isChatClosed} // Adicione esta propriedade
                   />
                 </>
               )

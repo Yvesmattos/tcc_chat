@@ -42,5 +42,8 @@ class ChatService:
                 "resposta": qa_pairs[idx][1],
                 "similaridade_maxima": similarity
             }
+            print("\n\n")
+            print(result)
+            print("\n\n")
             top_3_res.append(result)
         return top_3_res

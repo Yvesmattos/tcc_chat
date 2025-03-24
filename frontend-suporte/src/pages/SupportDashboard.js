@@ -217,8 +217,30 @@ const SupportDashboard = () => {
   const handleMarkAsResolved = async () => {
     if (selectedChat) {
       const support_id = localStorage.getItem('userid');
-
+  
       try {
+        // Primeiro envia a mensagem de encerramento
+        const closeMessage = {
+          message: "Este chat foi encerrado",
+          sender: 'support',
+          timesend: new Date().toISOString().slice(0, 19).replace('T', ' '),
+          chat_id: selectedChat.chatId,
+        };
+  
+        // Adiciona a mensagem à fila
+        setMessageQueue((prevQueue) => [...prevQueue, closeMessage]);
+  
+        // Envia via WebSocket para atualização em tempo real
+        if (socketRef.current) {
+          socketRef.current.send(JSON.stringify({
+            chatId: selectedChat.chatId,
+            sender: 'support',
+            message: "Este chat foi encerrado",
+            type: 'support_message',
+          }));
+        }
+  
+        // Atualiza o status do chat no backend
         await fetch(`${process.env.REACT_APP_API_URL_BACKEND}/api/support/updatestatuschat/${selectedChat.chatId}?status=2&support_id=${support_id}`, {
           method: 'POST',
           headers: {
@@ -227,15 +249,23 @@ const SupportDashboard = () => {
           },
           body: JSON.stringify({ response: 'Chat marcado como resolvido' }),
         });
-
-        // Remove o chat da lista de pendentes e de chats em andamento
+  
+        // Atualiza os estados locais
         setPendingChats((prevChats) => prevChats.filter((chat) => chat.chatId !== selectedChat.chatId));
         setOnGoingChats((prevChats) => prevChats.filter((chat) => chat.chatId !== selectedChat.chatId));
-
-        // Adiciona o chat à lista de resolvidos
-        setResolvedChats((prevChats) => [...prevChats, { ...selectedChat, status: 2 }]);
-
-        setSelectedChat(null);
+        setResolvedChats((prevChats) => [...prevChats, { 
+          ...selectedChat, 
+          status: 2,
+          messages: [...selectedChat.messages, closeMessage] // Adiciona a mensagem de encerramento
+        }]);
+  
+        // Atualiza o chat selecionado para mostrar a mensagem de encerramento
+        setSelectedChat(prev => prev ? {
+          ...prev,
+          messages: [...prev.messages, closeMessage],
+          status: 2
+        } : null);
+        
         setResponse('');
       } catch (error) {
         console.error('Erro ao marcar chat como resolvido:', error);
