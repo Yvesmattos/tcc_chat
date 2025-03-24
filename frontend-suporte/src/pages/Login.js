@@ -13,11 +13,16 @@ function Login() {
         e.preventDefault();
         try {
             const response = await login(username, password);
+
+            console.log(response)
+
             localStorage.setItem('username', response.data.userfullname);
             localStorage.setItem('userid', response.data.id);
             localStorage.setItem('token', response.data.token);
             navigate('/dashboard');
+            console.log(response)
         } catch (error) {
+            console.log(error)
             alert("Usuário/Senha inválido");
         }
     };

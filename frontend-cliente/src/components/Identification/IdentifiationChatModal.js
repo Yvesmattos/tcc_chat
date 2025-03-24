@@ -20,6 +20,7 @@ const IdentificationForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    localStorage.setItem('isChatActive', 'true');
     onSubmit(formData);
   };
 
