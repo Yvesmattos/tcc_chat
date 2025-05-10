@@ -1,55 +1,58 @@
 import json
 import os
+import sys
+import torch
 from sentence_transformers import SentenceTransformer, InputExample, losses
 from torch.utils.data import DataLoader
-import os
 
-# Carregar o modelo pré-treinado
-# model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
-model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
+# Verificar se há GPU disponível
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
+# Caminho para o modelo base
+modelo_path = os.path.join("app", "modelos", "model2")
+model = SentenceTransformer(modelo_path, device=device)
+
+# Caminho para os dados de treinamento
 diretorio_atual = os.path.dirname(__file__)
-caminho_arquivo = os.path.join(diretorio_atual, 'treinamento_perguntas.json')
+caminho_arquivo = os.path.join(diretorio_atual, 'base_treinamento.json')
 
-print(caminho_arquivo)
-# Carregar dados de treinamento a partir de um arquivo JSON
+# Carregar dados de treinamento
 with open(caminho_arquivo, 'r', encoding='utf-8') as f:
     treinamento_perguntas = json.load(f)
 
-# Preparar exemplos para treinamento
+# Preparar os exemplos de treinamento
 train_examples = []
-
 for item in treinamento_perguntas:
-    perguntas = item['perguntas']
-    label = float(item['label'])
+    pergunta = item.get('pergunta')
+    comparar = item.get('comparar', [])
     
-    # Comparar a pergunta1 com as outras perguntas
-    pergunta1 = perguntas[0]
-    for i in range(1, len(perguntas)):
-        train_examples.append(InputExample(texts=[pergunta1, perguntas[i]], label=label))
+    for similar_text, score in comparar:
+        # Verificar se o score está entre 0 e 1
+        if 0 <= score <= 1:
+            train_examples.append(InputExample(texts=[pergunta, similar_text], label=score))
 
-# Criar um DataLoader para o treinamento
-train_dataloader = DataLoader(train_examples, shuffle=False, batch_size=2)
+# Criar DataLoader
+train_dataloader = DataLoader(train_examples, shuffle=True, batch_size=2)
 
-# Definir a loss function
+# Definir função de perda
 train_loss = losses.CosineSimilarityLoss(model)
 
 # Treinar o modelo
-# 50 epochs = 5 warmup_steps
-# 100 perguntas * 50 epochs = 5000 perguntas 
-# 100 perguntas * 5 warmup_steps = 500 perguntas
-# total de perguntas que serão contabilizadas 4500
-# definir o warmup entre 5% a 10% do total de treinamento
-model.fit(train_objectives=[(train_dataloader, train_loss)], epochs=50, warmup_steps=5)
+model.fit(
+    train_objectives=[(train_dataloader, train_loss)],
+    epochs=50,
+    warmup_steps=5,
+    show_progress_bar=True
+)
 
-# Diretório para salvar o modelo treinado
+# Caminho para salvar o novo modelo treinado
+base_dir = os.path.dirname(diretorio_atual)
+output_dir = os.path.normpath(os.path.join(base_dir, "modelos/model3"))
 
-output_dir = os.getenv("FOLDER")+"backend/modelos/2024_06_14_v3"
+# Criar diretório se não existir
+os.makedirs(output_dir, exist_ok=True)
 
-# Verificar se o diretório existe, caso contrário, criá-lo
-if not os.path.exists(output_dir):
-    os.makedirs(output_dir)
-
-# Salvar o modelo treinado
+# Salvar modelo treinado
 model.save(output_dir)
 
 print(f"Modelo treinado e salvo no diretório '{output_dir}'.")

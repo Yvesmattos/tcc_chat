@@ -65,8 +65,8 @@ const ChatModal = () => {
   };
 
   const connectWebSocket = (chatIdAux) => {
-    // const socket = new WebSocket("wss://ws_chat.serveo.net");
-    const socket = new WebSocket("ws://localhost:8080");
+    const socket = new WebSocket("wss://ws_chat.serveo.net");
+    // const socket = new WebSocket("ws://localhost:8080");
     setWs(socket);
 
     // Identificar como cliente ao conectar usando o chatId
@@ -147,8 +147,8 @@ const ChatModal = () => {
 
       // Simulação de resposta
       const response = await fetch(
-        // "https://py_ia_backend.serveo.net/chat/send_question",
-        "http://localhost:8085/chat/send_question",
+        "https://py_ia_backend.serveo.net/chat/send_question",
+        // "http://localhost:8085/chat/send_question",
         {
           method: "POST",
           headers: {
@@ -203,8 +203,8 @@ const ChatModal = () => {
       }, 1000);
     } else {
       const response1 = await fetch(
-        // `https://node_backend.serveo.net/api/client/orgs`,
-        `http://localhost:5000/api/client/orgs`,
+        `https://node_backend.serveo.net/api/client/orgs`,
+        // `http://localhost:5000/api/client/orgs`,
         {
           method: "POST",
           headers: {
@@ -222,8 +222,8 @@ const ChatModal = () => {
 
       if (data1.id) {
         const response2 = await fetch(
-          // `https://node_backend.serveo.net/api/support/chats`,
-          `http://localhost:5000/api/support/chats`,
+          `https://node_backend.serveo.net/api/support/chats`,
+          // `http://localhost:5000/api/support/chats`,
           {
             method: "POST",
             headers: {

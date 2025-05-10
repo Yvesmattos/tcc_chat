@@ -1,0 +1,1517 @@
+[
+    {
+        "pergunta": "Como faço para trocar minha senha?",
+        "comparar": [
+            ["Onde posso alterar minha senha?", 0.85],
+            ["Quero atualizar minha senha de acesso", 0.8],
+            ["Passo a passo para mudar a senha", 0.75],
+            ["Como redefinir minha senha?", 0.7],
+            ["Preciso modificar minha senha, como fazer?", 0.78],
+            ["Como cadastrar um novo usuário?", 0.2],
+            ["Onde vejo minhas notificações?", 0.15],
+            ["Qual o horário de atendimento?", 0.1],
+            ["Como faço para imprimir um relatório?", 0.15],
+            ["Quais são as opções de pagamento?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Não lembro/esqueci minha senha?",
+        "comparar": [
+            ["Como recuperar minha senha esquecida?", 0.9],
+            ["Procedimento para resetar a senha", 0.85],
+            ["O que fazer quando esqueço a senha?", 0.8],
+            ["Recuperação de senha perdida", 0.82],
+            ["Esqueci meu acesso, como proceder?", 0.78],
+            ["Como criar uma nova conta?", 0.25],
+            ["Onde vejo meu histórico de login?", 0.2],
+            ["Quero alterar meu e-mail cadastrado", 0.15],
+            ["Como faço para atualizar meu perfil?", 0.2],
+            ["Quais são as regras de uso do sistema?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como criar um usuário/login?",
+        "comparar": [
+            ["Passo a passo para criar nova conta", 0.88],
+            ["Quero registrar um novo usuário", 0.85],
+            ["Como faço para cadastrar um login?", 0.82],
+            ["Processo de criação de novo acesso", 0.8],
+            ["Preciso adicionar um novo usuário", 0.78],
+            ["Como excluir minha conta?", 0.2],
+            ["Onde vejo minhas configurações?", 0.15],
+            ["Quero mudar minha foto de perfil", 0.1],
+            ["Como faço para enviar um ticket?", 0.15],
+            ["Quais são os planos disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como criar um operador/usuário para o aplicativo?",
+        "comparar": [
+            ["Cadastro de operador no app", 0.87],
+            ["Como adicionar usuário ao aplicativo?", 0.85],
+            ["Passo a passo para criar operador", 0.8],
+            ["Registro de novo usuário mobile", 0.78],
+            ["Configuração de acesso para operador", 0.75],
+            ["Como desinstalar o aplicativo?", 0.2],
+            ["Onde vejo as atualizações do app?", 0.15],
+            ["Quero mudar o tema do aplicativo", 0.1],
+            ["Como faço backup dos dados?", 0.15],
+            ["Quais as permissões necessárias?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Criei o usuário porém no aplicativo ainda aparece que está faltando alguma configuração no login?",
+        "comparar": [
+            ["Usuário criado mas com erro de configuração", 0.88],
+            ["Problema após criação de usuário", 0.85],
+            ["Login não funciona após cadastro", 0.82],
+            ["Configurações pendentes no novo usuário", 0.8],
+            ["Erro no acesso após criação de conta", 0.78],
+            ["Como deletar arquivos temporários?", 0.2],
+            ["Onde vejo o manual do usuário?", 0.15],
+            ["Quero alterar o idioma do sistema", 0.1],
+            ["Como faço para exportar dados?", 0.15],
+            ["Quais os requisitos do sistema?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "A mensagem Login inválido está aparecendo mesmo com o login e senha corretos",
+        "comparar": [
+            ["Erro de login com credenciais corretas", 0.9],
+            ["Não consigo acessar com dados válidos", 0.85],
+            ["Problema de autenticação com login certo", 0.82],
+            ["Acesso negado mesmo com senha correta", 0.8],
+            ["Sistema não aceita minhas credenciais", 0.78],
+            ["Como alterar minha assinatura?", 0.2],
+            ["Onde vejo minhas mensagens?", 0.15],
+            ["Quero configurar notificações", 0.1],
+            ["Como faço para compartilhar arquivos?", 0.15],
+            ["Quais os horários de manutenção?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "O que são os sites administrativo e operacional?",
+        "comparar": [
+            ["Diferença entre site admin e operacional", 0.88],
+            ["Definição dos ambientes administrativo/operacional", 0.85],
+            ["Para que serve cada tipo de site?", 0.82],
+            ["Explicação sobre os dois tipos de acesso", 0.8],
+            ["Quais as funções de cada ambiente?", 0.78],
+            ["Como resetar minhas preferências?", 0.2],
+            ["Onde vejo meu espaço de armazenamento?", 0.15],
+            ["Quero mudar meu plano de assinatura", 0.1],
+            ["Como faço para contactar o suporte?", 0.15],
+            ["Quais os benefícios premium?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Existe uma maneira de verificar que usuário fez alterações no sistema?",
+        "comparar": [
+            ["Como rastrear alterações de usuários?", 0.9],
+            ["Histórico de modificações no sistema", 0.85],
+            ["Ver quem alterou informações", 0.82],
+            ["Auditoria de mudanças no sistema", 0.8],
+            ["Log de atividades dos usuários", 0.78],
+            ["Como personalizar meu dashboard?", 0.2],
+            ["Onde vejo os tutoriais?", 0.15],
+            ["Quero configurar meu perfil", 0.1],
+            ["Como faço para integrar com outros apps?", 0.15],
+            ["Quais os atalhos de teclado?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como faço para bloquear / controlar os dias e horários de acesso ao sistema?",
+        "comparar": [
+            ["Restringir horário de acesso", 0.9],
+            ["Configurar disponibilidade do sistema", 0.85],
+            ["Limitar acesso por horário", 0.82],
+            ["Definir períodos de funcionamento", 0.8],
+            ["Controle de acesso temporal", 0.78],
+            ["Como alterar meu endereço?", 0.2],
+            ["Onde vejo minhas estatísticas?", 0.15],
+            ["Quero mudar minha senha", 0.1],
+            ["Como faço para convidar colegas?", 0.15],
+            ["Quais os tipos de relatórios?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Existe uma forma de limitar que os vendedores vejam as propostas de outro vendedor?",
+        "comparar": [
+            ["Restringir visibilidade entre vendedores", 0.9],
+            ["Como impedir acesso a propostas alheias?", 0.85],
+            ["Configurar privacidade de vendas", 0.82],
+            ["Limitar visualização de propostas", 0.8],
+            ["Controle de acesso a oportunidades", 0.78],
+            ["Como adicionar um novo produto?", 0.2],
+            ["Onde vejo meu desempenho?", 0.15],
+            ["Quero exportar minha lista de clientes", 0.1],
+            ["Como faço para ordenar meus contatos?", 0.15],
+            ["Quais as métricas disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como alterar as permissões de acesso ao sistema?",
+        "comparar": [
+            ["Como configurar níveis de acesso?", 0.88],
+            ["Ajustar permissões de usuários", 0.85],
+            ["Gerenciar direitos de acesso", 0.82],
+            ["Modificar privilégios no sistema", 0.8],
+            ["Controle de autorizações do sistema", 0.78],
+            ["Como criar um novo relatório?", 0.2],
+            ["Onde vejo o histórico de login?", 0.15],
+            ["Quero alterar meu e-mail cadastrado", 0.1],
+            ["Como exportar dados do sistema?", 0.15],
+            ["Quais os requisitos mínimos do sistema?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "A quais acessos posso limitar aos funcionários?",
+        "comparar": [
+            ["Quais permissões posso restringir?", 0.87],
+            ["Tipos de acesso que podem ser limitados", 0.85],
+            ["Controle de permissões por função", 0.82],
+            ["O que posso bloquear para funcionários?", 0.8],
+            ["Níveis de restrição disponíveis", 0.75],
+            ["Como adicionar um novo departamento?", 0.2],
+            ["Onde vejo o manual do colaborador?", 0.15],
+            ["Quero configurar meu perfil", 0.1],
+            ["Como faço backup dos dados?", 0.15],
+            ["Quais as políticas de segurança?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "É possível adicionar e-mails extras em um cliente?",
+        "comparar": [
+            ["Como incluir e-mails adicionais?", 0.9],
+            ["Adicionar contatos secundários", 0.85],
+            ["Inserir múltiplos e-mails no cadastro", 0.82],
+            ["Registrar e-mails extras para cliente", 0.8],
+            ["Cadastro de contatos alternativos", 0.78],
+            ["Como excluir um cliente?", 0.2],
+            ["Onde vejo o histórico de atendimentos?", 0.15],
+            ["Quero alterar o tipo de cliente", 0.1],
+            ["Como faço para mesclar cadastros?", 0.15],
+            ["Quais os campos obrigatórios?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Posso adicionar mais de 3 telefones no sistema?",
+        "comparar": [
+            ["Limite de telefones por cadastro", 0.88],
+            ["Como registrar múltiplos telefones?", 0.85],
+            ["Adicionar vários contatos telefônicos", 0.82],
+            ["Quantos números posso cadastrar?", 0.8],
+            ["Incluir telefones extras no sistema", 0.75],
+            ["Como alterar o endereço principal?", 0.2],
+            ["Onde vejo os contatos recentes?", 0.15],
+            ["Quero filtrar meus clientes", 0.1],
+            ["Como faço para exportar contatos?", 0.15],
+            ["Quais os tipos de telefone aceitos?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como definir os campos obrigatórios para o cadastro do cliente?",
+        "comparar": [
+            ["Configurar campos requeridos", 0.9],
+            ["Estabelecer informações obrigatórias", 0.85],
+            ["Quais dados devem ser preenchidos?", 0.82],
+            ["Definir requisitos de cadastro", 0.8],
+            ["Personalizar campos essenciais", 0.75],
+            ["Como importar lista de clientes?", 0.2],
+            ["Onde vejo os cadastros duplicados?", 0.15],
+            ["Quero ordenar minha lista de clientes", 0.1],
+            ["Como faço busca avançada?", 0.15],
+            ["Quais os filtros disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "É possível ter cadastros com CPF ou CNPJ duplicados?",
+        "comparar": [
+            ["Permissão para documentos repetidos", 0.88],
+            ["Cadastros com mesmo CPF/CNPJ", 0.85],
+            ["Como lidar com documentos duplicados?", 0.82],
+            ["Configuração para registros repetidos", 0.8],
+            ["Bloqueio de cadastros duplicados", 0.75],
+            ["Como alterar tipo de pessoa?", 0.2],
+            ["Onde vejo os cadastros inativos?", 0.15],
+            ["Quero exportar meus clientes", 0.1],
+            ["Como faço para mesclar contatos?", 0.15],
+            ["Quais os relatórios disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como faço para cadastrar um endereço diferente para faturamento?",
+        "comparar": [
+            ["Incluir endereço fiscal alternativo", 0.9],
+            ["Registrar local de cobrança diferente", 0.85],
+            ["Como adicionar endereço de fatura?", 0.82],
+            ["Configurar endereço para notas fiscais", 0.8],
+            ["Cadastrar local alternativo para cobrança", 0.75],
+            ["Como alterar o vendedor responsável?", 0.2],
+            ["Onde vejo os prazos de entrega?", 0.15],
+            ["Quero filtrar por região geográfica", 0.1],
+            ["Como faço para agrupar clientes?", 0.15],
+            ["Quais os tipos de endereço aceitos?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Não estou conseguindo enviar e-mail.",
+        "comparar": [
+            ["Problemas no envio de e-mails", 0.9],
+            ["Erro ao tentar enviar mensagem", 0.85],
+            ["E-mails não estão sendo enviados", 0.82],
+            ["Falha no sistema de e-mail", 0.8],
+            ["Como resolver problemas de envio?", 0.75],
+            ["Como configurar minha assinatura?", 0.2],
+            ["Onde vejo minhas mensagens enviadas?", 0.15],
+            ["Quero alterar meu template de e-mail", 0.1],
+            ["Como faço para importar contatos?", 0.15],
+            ["Quais os limites de envio diário?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Posso enviar e-mails através do VEL?",
+        "comparar": [
+            ["Como usar o sistema de e-mail do VEL?", 0.88],
+            ["Funcionalidade de envio de e-mails", 0.85],
+            ["Integração de e-mail no sistema", 0.82],
+            ["Envio de mensagens pelo VEL", 0.8],
+            ["Configuração do serviço de e-mail", 0.75],
+            ["Como criar um novo template?", 0.2],
+            ["Onde vejo minhas pastas de e-mail?", 0.15],
+            ["Quero filtrar minhas mensagens", 0.1],
+            ["Como faço para exportar e-mails?", 0.15],
+            ["Quais os anexos permitidos?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Posso ter mais de um e-mail configurado no sistema?",
+        "comparar": [
+            ["Como adicionar múltiplos e-mails?", 0.9],
+            ["Configuração de e-mails secundários", 0.85],
+            ["Registrar vários endereços de e-mail", 0.82],
+            ["Incluir contas de e-mail adicionais", 0.8],
+            ["Quantos e-mails posso cadastrar?", 0.75],
+            ["Como alterar meu telefone?", 0.2],
+            ["Onde vejo minhas notificações?", 0.15],
+            ["Quero mudar minha foto de perfil", 0.1],
+            ["Como faço para sincronizar contatos?", 0.15],
+            ["Quais os tipos de notificação?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como faço para cadastrar no sistema um e-mail de cada departamento da minha empresa?",
+        "comparar": [
+            ["Configurar e-mails por setor", 0.88],
+            ["Como registrar e-mails departamentais?", 0.85],
+            ["Vincular e-mails a diferentes áreas", 0.82],
+            ["Cadastro de contas por departamento", 0.8],
+            ["Definir e-mails institucionais por setor", 0.78],
+            ["Como alterar o logotipo do sistema?", 0.2],
+            ["Onde vejo o consumo de armazenamento?", 0.15],
+            ["Quero mudar o fuso horário", 0.1],
+            ["Como faço para integrar com CRM?", 0.15],
+            ["Quais os relatórios de desempenho?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "É possível receber cópia dos e-mails enviados através do sistema?",
+        "comparar": [
+            ["Como ativar CC em e-mails enviados?", 0.9],
+            ["Receber cópias de mensagens enviadas", 0.85],
+            ["Configurar cópias ocultas (BCC)", 0.82],
+            ["Registro de e-mails enviados", 0.8],
+            ["Armazenar cópias de correspondência", 0.75],
+            ["Como criar assinatura digital?", 0.2],
+            ["Onde vejo o histórico de anexos?", 0.15],
+            ["Quero personalizar templates", 0.1],
+            ["Como faço para filtrar spam?", 0.15],
+            ["Quais os limites de anexos?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "O que é o minha conta?",
+        "comparar": [
+            ["Explicação sobre o portal 'Minha Conta'", 0.9],
+            ["Funcionalidades do ambiente Minha Conta", 0.85],
+            ["Para que serve o Minha Conta?", 0.82],
+            ["Visão geral do portal do cliente", 0.8],
+            ["Recursos disponíveis no Minha Conta", 0.78],
+            ["Como resetar minhas preferências?", 0.2],
+            ["Onde vejo minhas permissões?", 0.15],
+            ["Quero mudar meu plano", 0.1],
+            ["Como faço para contactar o suporte?", 0.15],
+            ["Quais os benefícios premium?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como criar o acesso para o Minha Conta",
+        "comparar": [
+            ["Passo a passo para criar conta de cliente", 0.88],
+            ["Habilitar acesso ao portal Minha Conta", 0.85],
+            ["Cadastro de usuário no ambiente do cliente", 0.82],
+            ["Como ativar o Minha Conta para clientes?", 0.8],
+            ["Configurar login para acesso do cliente", 0.75],
+            ["Como excluir uma conta de cliente?", 0.2],
+            ["Onde vejo os acessos recentes?", 0.15],
+            ["Quero limitar funcionalidades", 0.1],
+            ["Como faço para exportar dados?", 0.15],
+            ["Quais os requisitos de senha?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Existe um site para o meu cliente ter acesso aos documentos dele?",
+        "comparar": [
+            ["Como clientes acessam seus documentos?", 0.9],
+            ["Portal de documentos para clientes", 0.85],
+            ["Acesso remoto a arquivos do cliente", 0.82],
+            ["Visualização de documentos online", 0.8],
+            ["Compartilhamento de arquivos com clientes", 0.75],
+            ["Como criar pastas personalizadas?", 0.2],
+            ["Onde vejo o histórico de downloads?", 0.15],
+            ["Quero alterar permissões", 0.1],
+            ["Como faço backup dos documentos?", 0.15],
+            ["Quais os formatos suportados?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Onde posso anexar o ASO, Ficha técnica de produtos, Ordens de Serviço e outros documentos para o meu cliente ver?",
+        "comparar": [
+            ["Como vincular documentos ao cliente?", 0.88],
+            ["Upload de arquivos para acesso do cliente", 0.85],
+            ["Anexar documentos técnicos", 0.82],
+            ["Inserir certificados e laudos", 0.8],
+            ["Compartilhar documentos no portal", 0.78],
+            ["Como excluir arquivos antigos?", 0.2],
+            ["Onde vejo o espaço utilizado?", 0.15],
+            ["Quero organizar por categorias", 0.1],
+            ["Como faço para compactar arquivos?", 0.15],
+            ["Quais os tamanhos máximos?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Os roteiros que agendei não estão aparecendo para o meu cliente no Minha Conta",
+        "comparar": [
+            ["Problema de visibilidade de agendamentos", 0.9],
+            ["Roteiros não visíveis no portal", 0.85],
+            ["Agendamentos não aparecendo para cliente", 0.82],
+            ["Falha na exibição de cronogramas", 0.8],
+            ["Como resolver problemas de exibição?", 0.75],
+            ["Como criar novo template?", 0.2],
+            ["Onde vejo os logs do sistema?", 0.15],
+            ["Quero alterar o layout", 0.1],
+            ["Como faço para sincronizar dados?", 0.15],
+            ["Quais os horários de atualização?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Posso trocar a imagem do plano de fundo do site Minha Conta?",
+        "comparar": [
+            ["Personalizar aparência do portal", 0.88],
+            ["Como alterar o background?", 0.85],
+            ["Mudar imagem de fundo do Minha Conta", 0.82],
+            ["Customização visual do portal", 0.8],
+            ["Trocar tema do ambiente do cliente", 0.75],
+            ["Como resetar configurações?", 0.2],
+            ["Onde vejo as versões anteriores?", 0.15],
+            ["Quero mudar as cores", 0.1],
+            ["Como faço para pré-visualizar?", 0.15],
+            ["Quais os formatos suportados?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como coloco o acesso para o Minha Conta no meu site comercial?",
+        "comparar": [
+            ["Integrar link do Minha Conta no site", 0.9],
+            ["Vincular portal ao site institucional", 0.85],
+            ["Adicionar botão de acesso no website", 0.82],
+            ["Como disponibilizar o link externamente?", 0.8],
+            ["Configurar redirecionamento para o portal", 0.75],
+            ["Como alterar domínio do site?", 0.2],
+            ["Onde vejo as estatísticas de acesso?", 0.15],
+            ["Quero personalizar o formulário", 0.1],
+            ["Como faço para testar integração?", 0.15],
+            ["Quais os requisitos técnicos?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Posso colocar, fazer upload, de outros documentos no minha conta?",
+        "comparar": [
+            ["Como adicionar arquivos pessoais?", 0.88],
+            ["Upload de documentos complementares", 0.85],
+            ["Inserir arquivos adicionais no portal", 0.82],
+            ["Anexar documentos extras", 0.8],
+            ["Compartilhar materiais com clientes", 0.78],
+            ["Como organizar pastas?", 0.2],
+            ["Onde vejo o histórico de alterações?", 0.15],
+            ["Quero limitar tamanhos", 0.1],
+            ["Como faço para compartilhar?", 0.15],
+            ["Quais as extensões permitidas?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Contas vencendo mostra apenas as contas do mês vigente ou de meses passados?",
+        "comparar": [
+            ["Qual o período de exibição de contas vencidas?", 0.88],
+            ["As contas vencidas incluem meses anteriores?", 0.85],
+            ["Filtro temporal para contas vencidas", 0.82],
+            ["Como visualizar contas vencidas antigas?", 0.8],
+            ["Abrangência do relatório de vencimentos", 0.78],
+            ["Como cadastrar nova forma de pagamento?", 0.2],
+            ["Onde vejo o fluxo de caixa?", 0.15],
+            ["Quero exportar extrato bancário", 0.1],
+            ["Como faço conciliação bancária?", 0.15],
+            ["Quais os tipos de relatório financeiro?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como posso eliminar cadastros duplicados?",
+        "comparar": [
+            ["Processo para remover registros duplicados", 0.9],
+            ["Ferramenta de merge de cadastros", 0.85],
+            ["Como unificar clientes repetidos?", 0.82],
+            ["Excluir entradas duplicadas no sistema", 0.8],
+            ["Solução para cadastros replicados", 0.75],
+            ["Como importar lista de contatos?", 0.2],
+            ["Onde vejo o histórico de alterações?", 0.15],
+            ["Quero filtrar por data de cadastro", 0.1],
+            ["Como faço backup da base?", 0.15],
+            ["Quais os critérios de duplicidade?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Qual a diferença de atendimento para OR?",
+        "comparar": [
+            ["Comparativo entre atendimento e OR", 0.88],
+            ["Quando usar atendimento ou orçamento rápido?", 0.85],
+            ["Vantagens de cada tipo de registro", 0.82],
+            ["Distinção entre fluxos de trabalho", 0.8],
+            ["Casos para uso de cada metodologia", 0.78],
+            ["Como criar template de proposta?", 0.2],
+            ["Onde vejo métricas de conversão?", 0.15],
+            ["Quero alterar etapas do funil", 0.1],
+            ["Como faço para segmentar clientes?", 0.15],
+            ["Quais os status disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Posso lançar mais de um roteiro para um avulso?",
+        "comparar": [
+            ["Múltiplos agendamentos para serviço avulso", 0.9],
+            ["Quantidade máxima de roteiros por avulso", 0.85],
+            ["Como adicionar segundo roteiro a avulso?", 0.82],
+            ["Limitações de agendamento para avulsos", 0.8],
+            ["Gerenciamento de vários roteiros avulsos", 0.75],
+            ["Como alterar técnico responsável?", 0.2],
+            ["Onde vejo o mapa de rotas?", 0.15],
+            ["Quero filtrar por tipo de serviço", 0.1],
+            ["Como faço para reagendar em massa?", 0.15],
+            ["Quais os horários disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como colocar outro endereço de cobrança para um cliente?",
+        "comparar": [
+            ["Cadastrar endereço fiscal alternativo", 0.88],
+            ["Adicionar local de cobrança diferente", 0.85],
+            ["Vincular novo endereço para faturamento", 0.82],
+            ["Registrar endereço secundário para NF", 0.8],
+            ["Configurar endereço de cobrança adicional", 0.78],
+            ["Como alterar vendedor responsável?", 0.2],
+            ["Onde vejo histórico de alterações?", 0.15],
+            ["Quero exportar dados fiscais", 0.1],
+            ["Como faço para mesclar cadastros?", 0.15],
+            ["Quais os documentos necessários?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Posso lançar dois serviços na mesma proposta?",
+        "comparar": [
+            ["Como incluir múltiplos serviços em uma proposta", 0.9],
+            ["Vincular vários serviços a um mesmo orçamento", 0.85],
+            ["Limite de serviços por proposta", 0.82],
+            ["Trabalhar com serviços combinados", 0.8],
+            ["Gerenciamento de propostas com vários itens", 0.75],
+            ["Como duplicar uma proposta?", 0.2],
+            ["Onde vejo o histórico de versões?", 0.15],
+            ["Quero criar pacote de serviços", 0.1],
+            ["Como faço para reutilizar proposta?", 0.15],
+            ["Quais os descontos disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como faço para adicionar mais um email no cliente?",
+        "comparar": [
+            ["Incluir email secundário no cadastro", 0.88],
+            ["Adicionar contato alternativo por email", 0.85],
+            ["Registrar múltiplos emails para cliente", 0.82],
+            ["Como cadastrar email adicional", 0.8],
+            ["Gestão de contatos eletrônicos do cliente", 0.78],
+            ["Como alterar telefone principal?", 0.2],
+            ["Onde vejo contatos inativos?", 0.15],
+            ["Quero filtrar por domínio de email", 0.1],
+            ["Como faço para validar emails?", 0.15],
+            ["Quais os formatos aceitos?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "As visitas pré-orçamento aparecem no aplicativo?",
+        "comparar": [
+            ["Visibilidade de agendamentos no app", 0.9],
+            ["Como visualizar visitas orçamentárias no mobile", 0.85],
+            ["Exibição de pré-orçamentos no aplicativo", 0.82],
+            ["Configuração de visibilidade de visitas", 0.8],
+            ["Acesso a agendamentos de orçamento via app", 0.75],
+            ["Como sincronizar offline?", 0.2],
+            ["Onde vejo o histórico de conexão?", 0.15],
+            ["Quero alterar notificações", 0.1],
+            ["Como faço para atualizar o app?", 0.15],
+            ["Quais os requisitos do dispositivo?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como faço para visualizar a ficha de visita (usada para levantar orçamento)?",
+        "comparar": [
+            ["Acessar formulário de pré-orçamento", 0.88],
+            ["Onde encontrar checklist de visita", 0.85],
+            ["Consultar relatório de levantamento técnico", 0.82],
+            ["Visualizar dados coletados na visita", 0.8],
+            ["Exportar informações da ficha técnica", 0.78],
+            ["Como criar novo modelo de ficha?", 0.2],
+            ["Onde vejo visitas canceladas?", 0.15],
+            ["Quero personalizar campos", 0.1],
+            ["Como faço para compartilhar?", 0.15],
+            ["Quais os anexos permitidos?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como faço para gerar a proposta após ter feito a visita?",
+        "comparar": [
+            ["Fluxo pós-visita para criação de proposta", 0.9],
+            ["Converter visita em orçamento", 0.85],
+            ["Transformar levantamento em proposta comercial", 0.82],
+            ["Finalizar visita e gerar documento", 0.8],
+            ["Processo de fechamento técnico-comercial", 0.75],
+            ["Como adicionar termos personalizados?", 0.2],
+            ["Onde vejo propostas expiradas?", 0.15],
+            ["Quero duplicar proposta antiga", 0.1],
+            ["Como faço para pré-visualizar?", 0.15],
+            ["Quais as formas de pagamento?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como faço para alterar as pragas de um serviço?",
+        "comparar": [
+            ["Modificar pragas em serviços existentes", 0.9],
+            ["Atualizar lista de pragas em atendimento", 0.85],
+            ["Editar pragas vinculadas a serviço", 0.82],
+            ["Como remover ou adicionar pragas", 0.8],
+            ["Ajustar especificação de pragas em serviço", 0.78],
+            ["Como criar nova praga no sistema?", 0.2],
+            ["Onde vejo histórico de alterações?", 0.15],
+            ["Quero exportar relatório de pragas", 0.1],
+            ["Como faço para filtrar por praga?", 0.15],
+            ["Quais produtos para cada praga?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como faço para alterar o valor da proposta?",
+        "comparar": [
+            ["Ajustar valor de proposta já criada", 0.88],
+            ["Modificar preço em orçamento existente", 0.85],
+            ["Atualizar valor comercial da proposta", 0.82],
+            ["Como redefinir preço da proposta", 0.8],
+            ["Editar valor total do serviço", 0.78],
+            ["Como duplicar uma proposta?", 0.2],
+            ["Onde vejo histórico de alterações?", 0.15],
+            ["Quero adicionar desconto", 0.1],
+            ["Como faço para reenviar proposta?", 0.15],
+            ["Quais formas de pagamento?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Quando cancelo uma proposta as parcelas também são canceladas?",
+        "comparar": [
+            ["Efeito do cancelamento nas parcelas", 0.9],
+            ["Status das parcelas ao cancelar proposta", 0.85],
+            ["Como ficam os recebíveis ao cancelar", 0.82],
+            ["Impacto financeiro do cancelamento", 0.8],
+            ["Relação proposta-parcelas no cancelamento", 0.75],
+            ["Como gerar nova proposta?", 0.2],
+            ["Onde vejo propostas canceladas?", 0.15],
+            ["Quero reativar proposta antiga", 0.1],
+            ["Como faço estorno financeiro?", 0.15],
+            ["Quais os tipos de cancelamento?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "O que acontece ao cancelar uma proposta?",
+        "comparar": [
+            ["Consequências do cancelamento de proposta", 0.88],
+            ["Fluxo após cancelar um orçamento", 0.85],
+            ["Efeitos no sistema ao cancelar", 0.82],
+            ["Processo completo de cancelamento", 0.8],
+            ["Impacto operacional do cancelamento", 0.78],
+            ["Como criar proposta similar?", 0.2],
+            ["Onde vejo histórico de cancelamentos?", 0.15],
+            ["Quero recuperar proposta cancelada", 0.1],
+            ["Como faço backup de propostas?", 0.15],
+            ["Quais as regras de cancelamento?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "O meu cliente desistiu do serviço, como faço para cancelar a proposta?",
+        "comparar": [
+            ["Cancelar proposta por desistência", 0.9],
+            ["Processo para cancelamento a pedido", 0.85],
+            ["Encerrar proposta quando cliente desiste", 0.82],
+            ["Fluxo de cancelamento solicitado", 0.8],
+            ["Como registrar desistência no sistema", 0.75],
+            ["Como criar nova proposta?", 0.2],
+            ["Onde vejo clientes inativos?", 0.15],
+            ["Quero bloquear cliente", 0.1],
+            ["Como faço para exportar dados?", 0.15],
+            ["Quais as políticas de reembolso?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Onde vejo os serviços vencidos, com garantia expirada?",
+        "comparar": [
+            ["Relatório de garantias vencidas", 0.88],
+            ["Como consultar serviços fora da garantia", 0.85],
+            ["Visualizar contratos com garantia expirada", 0.82],
+            ["Filtrar serviços por validade de garantia", 0.8],
+            ["Monitoramento de prazos de garantia", 0.78],
+            ["Como renovar garantia?", 0.2],
+            ["Onde vejo serviços ativos?", 0.15],
+            ["Quero exportar relatório", 0.1],
+            ["Como faço para filtrar por data?", 0.15],
+            ["Quais os tipos de garantia?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Não estou encontrando uma proposta para replicagem em Serviços Vencidos.",
+        "comparar": [
+            ["Problema para localizar proposta vencida", 0.9],
+            ["Dificuldade em encontrar proposta para replicar", 0.85],
+            ["Proposta não aparece para renovação", 0.82],
+            ["Filtros para busca de propostas vencidas", 0.8],
+            ["Solução para propostas ausentes no relatório", 0.75],
+            ["Como criar proposta manualmente?", 0.2],
+            ["Onde vejo todas as propostas?", 0.15],
+            ["Quero alterar filtros padrão", 0.1],
+            ["Como faço busca avançada?", 0.15],
+            ["Quais os critérios de vencimento?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como posso replicar um contrato com monitoramento?",
+        "comparar": [
+            ["Duplicar contrato de monitoramento", 0.88],
+            ["Renovar contrato com serviço de monitoria", 0.85],
+            ["Criar nova versão de contrato monitorado", 0.82],
+            ["Processo para replicar contrato CIP", 0.8],
+            ["Como copiar contrato com armadilhas", 0.78],
+            ["Como iniciar novo monitoramento?", 0.2],
+            ["Onde vejo contratos antigos?", 0.15],
+            ["Quero alterar frequência", 0.1],
+            ["Como faço para exportar dados?", 0.15],
+            ["Quais os tipos de armadilhas?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Por que a renovação de uma proposta avulsa é diferente de uma proposta contrato?",
+        "comparar": [
+            ["Diferenças no fluxo de renovação", 0.9],
+            ["Distinção entre avulso e contrato na renovação", 0.85],
+            ["Variações no processo de recorrência", 0.82],
+            ["Como cada tipo de proposta se renova", 0.8],
+            ["Lógica distinta para cada modalidade", 0.75],
+            ["Como converter avulso em contrato?", 0.2],
+            ["Onde vejo histórico de renovações?", 0.15],
+            ["Quero unificar processos", 0.1],
+            ["Como faço para comparar?", 0.15],
+            ["Quais os benefícios de cada tipo?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Qual a diferença da Ficha e da Ordem de serviço?",
+        "comparar": [
+            ["Comparativo entre documentos técnicos", 0.88],
+            ["Distinção entre ficha e OS", 0.85],
+            ["Quando usar cada documento", 0.82],
+            ["Diferenças estruturais entre formulários", 0.8],
+            ["Propósito de cada tipo de documento", 0.78],
+            ["Como criar modelo personalizado?", 0.2],
+            ["Onde vejo documentos emitidos?", 0.15],
+            ["Quero alterar campos obrigatórios", 0.1],
+            ["Como faço para exportar?", 0.15],
+            ["Quais os formatos de impressão?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como faço para lançar um serviço extra?",
+        "comparar": [
+            ["Adicionar serviço adicional", 0.9],
+            ["Registrar atendimento complementar", 0.85],
+            ["Incluir atividade extra no contrato", 0.82],
+            ["Processo para serviços extras", 0.8],
+            ["Como cobrar por serviço adicional", 0.75],
+            ["Como cancelar serviço?", 0.2],
+            ["Onde vejo serviços realizados?", 0.15],
+            ["Quero alterar valor do extra", 0.1],
+            ["Como faço para emitir nota?", 0.15],
+            ["Quais os tipos de extras?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como alterar a periodicidade de um contrato?",
+        "comparar": [
+            ["Modificar frequência de serviços", 0.88],
+            ["Ajustar recorrência do contrato", 0.85],
+            ["Redefinir periodicidade contratual", 0.82],
+            ["Mudar intervalo entre visitas", 0.8],
+            ["Atualizar agenda de serviços recorrentes", 0.78],
+            ["Como pausar contrato?", 0.2],
+            ["Onde vejo histórico de alterações?", 0.15],
+            ["Quero exportar cronograma", 0.1],
+            ["Como faço para notificar cliente?", 0.15],
+            ["Quais as periodicidades disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Não estou conseguindo fazer a volta do serviço, aparece um sinal de bloqueio",
+        "comparar": [
+            ["Resolver bloqueio na finalização", 0.9],
+            ["Problema ao registrar volta de serviço", 0.85],
+            ["Sinal de impedimento na conclusão", 0.82],
+            ["Como desbloquear finalização", 0.8],
+            ["Motivos para bloqueio na volta", 0.75],
+            ["Como registrar apenas a ida?", 0.2],
+            ["Onde vejo serviços pendentes?", 0.15],
+            ["Quero forçar finalização", 0.1],
+            ["Como faço para reportar erro?", 0.15],
+            ["Quais os pré-requisitos para volta?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como alterar as pragas que estão na Ordem de Serviço?",
+        "comparar": [
+            ["Editar pragas na OS já emitida", 0.88],
+            ["Modificar lista de pragas no documento", 0.85],
+            ["Atualizar especificação técnica da OS", 0.82],
+            ["Corrigir pragas em ordem de serviço", 0.8],
+            ["Ajuste de pragas após emissão", 0.78],
+            ["Como cancelar OS?", 0.2],
+            ["Onde vejo versões anteriores?", 0.15],
+            ["Quero adicionar nova praga", 0.1],
+            ["Como faço para reimprimir?", 0.15],
+            ["Quais pragas estão disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Atualizei as pragas na proposta, mas elas ainda não aparecem na Ordem de Serviço, o que fazer?",
+        "comparar": [
+            ["Sincronização entre proposta e OS", 0.9],
+            ["Problema de atualização de pragas", 0.85],
+            ["Como refletir mudanças na OS", 0.82],
+            ["Atualizar ordem de serviço após alteração", 0.8],
+            ["Forçar atualização de dados técnicos", 0.75],
+            ["Como gerar nova OS?", 0.2],
+            ["Onde vejo histórico de alterações?", 0.15],
+            ["Quero editar OS manualmente", 0.1],
+            ["Como faço para sincronizar?", 0.15],
+            ["Quais os campos bloqueados?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como cancelar um serviço que já tem OS (Ordem de Serviço) gerada?",
+        "comparar": [
+            ["Cancelamento de serviço com OS emitida", 0.88],
+            ["Procedimento para anular OS", 0.85],
+            ["Como desativar serviço já programado", 0.82],
+            ["Fluxo para cancelar após emissão", 0.8],
+            ["Reverter ordem de serviço gerada", 0.78],
+            ["Como reagendar serviço?", 0.2],
+            ["Onde vejo OS canceladas?", 0.15],
+            ["Quero estornar financeiro", 0.1],
+            ["Como faço para notificar?", 0.15],
+            ["Quais os motivos de cancelamento?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Por que não estão aparecendo os produtos no roteiro?",
+        "comparar": [
+            ["Problema de exibição de produtos", 0.9],
+            ["Produtos ausentes no roteiro", 0.85],
+            ["Como visualizar itens no serviço", 0.82],
+            ["Configurar exibição de produtos", 0.8],
+            ["Solução para produtos não listados", 0.75],
+            ["Como adicionar produto manualmente?", 0.2],
+            ["Onde vejo todos os produtos?", 0.15],
+            ["Quero filtrar por categoria", 0.1],
+            ["Como faço para vincular produtos?", 0.15],
+            ["Quais produtos estão disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Onde atualizo a lista de produtos?",
+        "comparar": [
+            ["Manutenção do cadastro de produtos", 0.88],
+            ["Como editar produtos disponíveis", 0.85],
+            ["Atualização de itens no sistema", 0.82],
+            ["Gerenciamento de lista de produtos", 0.8],
+            ["Modificar catálogo de insumos", 0.78],
+            ["Como importar lista de produtos?", 0.2],
+            ["Onde vejo produtos inativos?", 0.15],
+            ["Quero adicionar novo fornecedor", 0.1],
+            ["Como faço para exportar?", 0.15],
+            ["Quais os campos obrigatórios?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Cadastrei um produto, mas ele não está aparecendo no serviço que eu quero.",
+        "comparar": [
+            ["Problema de vinculação de produto", 0.9],
+            ["Produto novo não disponível no serviço", 0.85],
+            ["Como habilitar produto para serviço", 0.82],
+            ["Configurar associação de produtos", 0.8],
+            ["Solução para produto não listado", 0.75],
+            ["Como editar categoria?", 0.2],
+            ["Onde vejo produtos bloqueados?", 0.15],
+            ["Quero alterar classificação", 0.1],
+            ["Como faço para vincular?", 0.15],
+            ["Quais os pré-requisitos?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Preciso por o valor do serviço na Ordem de Serviço.",
+        "comparar": [
+            ["Incluir valor financeiro na OS", 0.88],
+            ["Como mostrar preço no documento", 0.85],
+            ["Configurar exibição de valores", 0.82],
+            ["Adicionar informação de custo", 0.8],
+            ["Personalizar campos financeiros", 0.78],
+            ["Como ocultar valores?", 0.2],
+            ["Onde vejo modelos de OS?", 0.15],
+            ["Quero formatar moeda", 0.1],
+            ["Como faço para personalizar?", 0.15],
+            ["Quais os campos disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Preciso gerar um certificado de garantia para cada veículo. Como proceder?",
+        "comparar": [
+            ["Emissão de certificados por veículo", 0.9],
+            ["Como criar garantias individuais para frota", 0.85],
+            ["Gerar certificados múltiplos para veículos", 0.82],
+            ["Processo para garantia por unidade", 0.8],
+            ["Vincular certificados a placas de veículos", 0.78],
+            ["Como cadastrar novo produto?", 0.2],
+            ["Onde vejo certificados emitidos?", 0.15],
+            ["Quero alterar modelo do documento", 0.1],
+            ["Como faço para exportar certificados?", 0.15],
+            ["Quais os dados obrigatórios?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como especificar as áreas tratadas no Certificado de Garantia?",
+        "comparar": [
+            ["Detalhamento de áreas no certificado", 0.88],
+            ["Como listar locais tratados", 0.85],
+            ["Incluir áreas específicas na garantia", 0.82],
+            ["Personalizar descrição de áreas", 0.8],
+            ["Mapeamento de áreas para certificação", 0.78],
+            ["Como adicionar nova área?", 0.2],
+            ["Onde vejo áreas cadastradas?", 0.15],
+            ["Quero editar descrição padrão", 0.1],
+            ["Como faço para vincular fotos?", 0.15],
+            ["Quais os tipos de área?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "É possível ter um certificado de garantia exclusivo para serviço de limpeza de reservatório?",
+        "comparar": [
+            ["Modelo especial para limpeza de reservatório", 0.9],
+            ["Certificado específico para serviço de água", 0.85],
+            ["Personalizar garantia para limpeza", 0.82],
+            ["Criar template exclusivo para reservatório", 0.8],
+            ["Documentação especializada para água potável", 0.75],
+            ["Como emitir certificado padrão?", 0.2],
+            ["Onde vejo modelos disponíveis?", 0.15],
+            ["Quero duplicar certificado", 0.1],
+            ["Como faço para aprovar modelo?", 0.15],
+            ["Quais os requisitos legais?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "A garantia do serviço está contando do primeiro serviço que fiz, deveria ser do atual, como posso corrigir?",
+        "comparar": [
+            ["Ajuste de data inicial da garantia", 0.88],
+            ["Modificar início do período de garantia", 0.85],
+            ["Corrigir cálculo de vigência da garantia", 0.82],
+            ["Alterar referência temporal da garantia", 0.8],
+            ["Redefinir data base para garantia", 0.78],
+            ["Como visualizar garantias ativas?", 0.2],
+            ["Onde vejo histórico de serviços?", 0.15],
+            ["Quero estender período", 0.1],
+            ["Como faço para reportar erro?", 0.15],
+            ["Quais as regras de garantia?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "O que é ?réplica??",
+        "comparar": [
+            ["Definição de réplica no sistema", 0.9],
+            ["Significado do termo réplica", 0.85],
+            ["Explicação sobre ambiente réplica", 0.82],
+            ["Para que serve a réplica", 0.8],
+            ["Entendendo o conceito de réplica", 0.75],
+            ["Como acessar ambiente principal?", 0.2],
+            ["Onde vejo status da réplica?", 0.15],
+            ["Quero sincronizar manualmente", 0.1],
+            ["Como faço para reportar problema?", 0.15],
+            ["Quais as diferenças entre ambientes?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Está aparecendo erro de autenticação mesmo com os dados certos.",
+        "comparar": [
+            ["Problema de login com credenciais válidas", 0.9],
+            ["Erro ao acessar com dados corretos", 0.85],
+            ["Falha de autenticação inexplicada", 0.82],
+            ["Sistema não reconhece login válido", 0.8],
+            ["Dificuldade de acesso com credenciais certas", 0.75],
+            ["Como resetar minha senha?", 0.2],
+            ["Onde vejo logs de acesso?", 0.15],
+            ["Quero alterar meu login", 0.1],
+            ["Como faço para contactar suporte?", 0.15],
+            ["Quais os requisitos de senha?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Mensagem ?Erro - Algumas configurações estão pendentes. Contate o suporte.?",
+        "comparar": [
+            ["Resolver pendências de configuração", 0.88],
+            ["Como solucionar erro de configuração", 0.85],
+            ["Ajustar parâmetros do sistema", 0.82],
+            ["Corrigir mensagem de configuração", 0.8],
+            ["Processo para validação de configurações", 0.78],
+            ["Como acessar menu de configurações?", 0.2],
+            ["Onde vejo requisitos do sistema?", 0.15],
+            ["Quero restaurar padrões", 0.1],
+            ["Como faço backup de configurações?", 0.15],
+            ["Quais configurações são obrigatórias?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Os serviços agendados não estão aparecendo.",
+        "comparar": [
+            ["Problema na exibição de agendamentos", 0.9],
+            ["Serviços programados não visíveis", 0.85],
+            ["Falha ao visualizar roteiros agendados", 0.82],
+            ["Como recuperar serviços não exibidos", 0.8],
+            ["Solução para agendamentos ausentes", 0.75],
+            ["Como criar novo agendamento?", 0.2],
+            ["Onde vejo histórico completo?", 0.15],
+            ["Quero filtrar por período", 0.1],
+            ["Como faço para sincronizar?", 0.15],
+            ["Quais os status possíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Terminei o serviço, finalizei, mas ainda não aparece no sistema.",
+        "comparar": [
+            ["Serviço concluído não atualizado", 0.88],
+            ["Problema de sincronização pós-serviço", 0.85],
+            ["Finalização não refletida no sistema", 0.82],
+            ["Como forçar atualização de status", 0.8],
+            ["Resolver atraso na atualização", 0.78],
+            ["Como registrar novo serviço?", 0.2],
+            ["Onde vejo serviços pendentes?", 0.15],
+            ["Quero reabrir serviço", 0.1],
+            ["Como faço para reportar?", 0.15],
+            ["Quais os prazos de atualização?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Adicionei os produtos mas eles não estão aparecendo no sistema.",
+        "comparar": [
+            ["Produtos cadastrados não visíveis", 0.9],
+            ["Itens adicionados não listados", 0.85],
+            ["Problema na exibição de produtos", 0.82],
+            ["Como visualizar produtos cadastrados", 0.8],
+            ["Solução para itens não exibidos", 0.75],
+            ["Como editar produto existente?", 0.2],
+            ["Onde vejo todos os produtos?", 0.15],
+            ["Quero filtrar por categoria", 0.1],
+            ["Como faço para exportar lista?", 0.15],
+            ["Quais os campos obrigatórios?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Adicionei os produtos no aplicativo, eles apareceram na tela da volta, mas não estão aparecendo nos documentos.",
+        "comparar": [
+            ["Produtos não refletidos em documentos", 0.88],
+            ["Itens não impressos nos relatórios", 0.85],
+            ["Discrepância entre app e documentos", 0.82],
+            ["Como sincronizar produtos com documentos", 0.8],
+            ["Resolver problema de impressão", 0.78],
+            ["Como gerar documento manualmente?", 0.2],
+            ["Onde vejo prévia do documento?", 0.15],
+            ["Quero alterar template", 0.1],
+            ["Como faço para forçar atualização?", 0.15],
+            ["Quais os formatos de exportação?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Fiz a sincronização do serviço finalizado, mas ele não está mostrando a hora de término do serviço no sistema, na tela da Volta. A hora de saída veio como 00:00.",
+        "comparar": [
+            ["Problema no registro de horário", 0.9],
+            ["Hora de término não registrada", 0.85],
+            ["Erro na marcação temporal", 0.82],
+            ["Como corrigir horário da volta", 0.8],
+            ["Solução para hora zerada", 0.75],
+            ["Como editar manualmente?", 0.2],
+            ["Onde vejo logs de tempo?", 0.15],
+            ["Quero ajustar fuso horário", 0.1],
+            ["Como faço para reportar?", 0.15],
+            ["Quais os formatos de hora?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Sincronizei, mas está aparecendo no roteiro a mensagem ?Problema de sincronização?",
+        "comparar": [
+            ["Erro durante processo de sincronia", 0.88],
+            ["Falha na transferência de dados", 0.85],
+            ["Problema na comunicação com servidor", 0.82],
+            ["Como resolver erro de sincronização", 0.8],
+            ["Solução para sincronia incompleta", 0.78],
+            ["Como forçar nova sincronização?", 0.2],
+            ["Onde vejo status da conexão?", 0.15],
+            ["Quero limpar cache", 0.1],
+            ["Como faço para testar conexão?", 0.15],
+            ["Quais os requisitos de rede?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Atualizei o aplicativo na Play Store, mas continua com erro",
+        "comparar": [
+            ["Problema persistente após atualização", 0.9],
+            ["Erro não resolvido com update", 0.85],
+            ["Falha após instalar nova versão", 0.82],
+            ["Como corrigir bugs pós-atualização", 0.8],
+            ["Solução para problemas recorrentes", 0.75],
+            ["Como reinstalar aplicativo?", 0.2],
+            ["Onde vejo versão instalada?", 0.15],
+            ["Quero voltar versão anterior", 0.1],
+            ["Como faço para limpar dados?", 0.15],
+            ["Quais os requisitos mínimos?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Está aparecendo várias vezes a mensagem ?Falha de autenticação?.",
+        "comparar": [
+            ["Erro recorrente de login", 0.88],
+            ["Problema constante de autenticação", 0.85],
+            ["Mensagem de falha repetitiva", 0.82],
+            ["Como resolver autenticação instável", 0.8],
+            ["Solução para falha persistente", 0.78],
+            ["Como alterar método de login?", 0.2],
+            ["Onde vejo tentativas falhas?", 0.15],
+            ["Quero resetar credenciais", 0.1],
+            ["Como faço para reportar?", 0.15],
+            ["Quais as causas comuns?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "A lista de ?Áreas? está vazia.",
+        "comparar": [
+            ["Problema na exibição de áreas", 0.9],
+            ["Nenhuma área disponível", 0.85],
+            ["Falha ao carregar locais", 0.82],
+            ["Como recuperar lista de áreas", 0.8],
+            ["Solução para áreas não exibidas", 0.75],
+            ["Como cadastrar nova área?", 0.2],
+            ["Onde vejo áreas inativas?", 0.15],
+            ["Quero importar lista", 0.1],
+            ["Como faço para sincronizar?", 0.15],
+            ["Quais os tipos de área?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Onde vejo a versão do aplicativo?",
+        "comparar": [
+            ["Como verificar versão instalada", 0.88],
+            ["Localizar número da versão", 0.85],
+            ["Consultar detalhes da build", 0.82],
+            ["Identificar versão do app", 0.8],
+            ["Menu de informações da versão", 0.78],
+            ["Como atualizar aplicativo?", 0.2],
+            ["Onde vejo changelog?", 0.15],
+            ["Quero reportar bug", 0.1],
+            ["Como faço para reinstalar?", 0.15],
+            ["Quais as novidades?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "O aplicativo está disponível para IOS?",
+        "comparar": [
+            ["Compatibilidade com dispositivos Apple", 0.9],
+            ["Versão para iPhone/iPad", 0.85],
+            ["Disponibilidade na App Store", 0.82],
+            ["Suporte para iOS no aplicativo", 0.8],
+            ["Opções para usuários Apple", 0.75],
+            ["Como acessar pelo navegador?", 0.2],
+            ["Onde vejo requisitos?", 0.15],
+            ["Quero testar versão beta", 0.1],
+            ["Como faço para sugerir plataforma?", 0.15],
+            ["Quais as diferenças entre versões?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Tentei escanear o QR Code, mas não funcionou",
+        "comparar": [
+            ["Problema na leitura do QR Code", 0.88],
+            ["Falha ao escanear código", 0.85],
+            ["Erro no reconhecimento do QR", 0.82],
+            ["Como resolver leitura de código", 0.8],
+            ["Solução para scanner não funcional", 0.78],
+            ["Como inserir código manualmente?", 0.2],
+            ["Onde vejo códigos cadastrados?", 0.15],
+            ["Quero gerar novo QR", 0.1],
+            ["Como faço para testar câmera?", 0.15],
+            ["Quais os formatos suportados?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Não estão aparecendo os produtos que preciso no aplicativo.",
+        "comparar": [
+            ["Produtos ausentes no mobile", 0.9],
+            ["Itens não disponíveis no app", 0.85],
+            ["Falha na exibição de produtos", 0.82],
+            ["Como visualizar todos os produtos", 0.8],
+            ["Solução para itens faltantes", 0.75],
+            ["Como sincronizar catálogo?", 0.2],
+            ["Onde vejo produtos desativados?", 0.15],
+            ["Quero filtrar por categoria", 0.1],
+            ["Como faço para reportar?", 0.15],
+            ["Quais os pré-requisitos?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Estou na tela de armadilhas e lá não está aparecendo a lista de produtos para selecionar",
+        "comparar": [
+            ["Falta de produtos em monitoramento", 0.88],
+            ["Itens não listados em CIP", 0.85],
+            ["Problema na seleção de produtos", 0.82],
+            ["Como habilitar produtos para armadilhas", 0.8],
+            ["Solução para lista vazia", 0.78],
+            ["Como cadastrar novo produto?", 0.2],
+            ["Onde vejo produtos vinculados?", 0.15],
+            ["Quero alterar configurações", 0.1],
+            ["Como faço para sincronizar?", 0.15],
+            ["Quais os produtos compatíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Preciso alterar alguma informação no roteiro que está no aplicativo, como proceder?",
+        "comparar": [
+            ["Editar roteiro já sincronizado no app", 0.9],
+            ["Modificar dados de serviço mobile", 0.85],
+            ["Atualizar informações no roteiro enviado", 0.82],
+            ["Corrigir detalhes após envio ao app", 0.8],
+            ["Processo para ajuste pós-sincronização", 0.78],
+            ["Como criar novo roteiro?", 0.2],
+            ["Onde vejo histórico de alterações?", 0.15],
+            ["Quero cancelar roteiro", 0.1],
+            ["Como faço para revogar acesso?", 0.15],
+            ["Quais campos podem ser editados?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Tentei tirar uma foto, mas o aplicativo fecha ao abrir a câmera.",
+        "comparar": [
+            ["App crash ao acessar câmera", 0.88],
+            ["Fechamento inesperado ao fotografar", 0.85],
+            ["Problema com recurso de câmera", 0.82],
+            ["Erro ao tentar capturar imagem", 0.8],
+            ["Como resolver falha na câmera", 0.78],
+            ["Como anexar foto existente?", 0.2],
+            ["Onde vejo fotos tiradas?", 0.15],
+            ["Quero alterar qualidade da imagem", 0.1],
+            ["Como faço para reportar bug?", 0.15],
+            ["Quais as permissões necessárias?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Onde é cadastrado o responsável pelo relatório de serviço?",
+        "comparar": [
+            ["Registro de técnico responsável", 0.9],
+            ["Como definir executor do serviço", 0.85],
+            ["Vincular operador ao relatório", 0.82],
+            ["Associar colaborador ao atendimento", 0.8],
+            ["Configurar responsável técnico", 0.75],
+            ["Como criar novo funcionário?", 0.2],
+            ["Onde vejo equipe disponível?", 0.15],
+            ["Quero alterar atribuição", 0.1],
+            ["Como faço para filtrar por técnico?", 0.15],
+            ["Quais os cargos disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "O que é o projeto CIP-M?",
+        "comparar": [
+            ["Definição do Controle Integrado de Pragas", 0.88],
+            ["Explicação sobre monitoramento CIP", 0.85],
+            ["Funcionalidades do módulo CIP-M", 0.82],
+            ["Para que serve o projeto de monitoramento", 0.8],
+            ["Visão geral do sistema CIP-M", 0.78],
+            ["Como criar nova armadilha?", 0.2],
+            ["Onde vejo projetos ativos?", 0.15],
+            ["Quero exportar relatórios", 0.1],
+            ["Como faço para configurar?", 0.15],
+            ["Quais os tipos de armadilha?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Tentei gerar o projeto, porém a proposta não está aparecendo na tela.",
+        "comparar": [
+            ["Proposta ausente no CIP-M", 0.9],
+            ["Falha ao vincular proposta ao projeto", 0.85],
+            ["Problema de exibição no monitoramento", 0.82],
+            ["Como encontrar proposta para CIP", 0.8],
+            ["Solução para propostas não listadas", 0.75],
+            ["Como criar proposta nova?", 0.2],
+            ["Onde vejo projetos cancelados?", 0.15],
+            ["Quero alterar filtros", 0.1],
+            ["Como faço para sincronizar?", 0.15],
+            ["Quais os pré-requisitos?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Onde alterar as configurações das armadilhas como tipo, status e ação?",
+        "comparar": [
+            ["Personalização de armadilhas CIP", 0.88],
+            ["Editar parâmetros de monitoramento", 0.85],
+            ["Configurar tipos e status", 0.82],
+            ["Gerenciar modelos de armadilhas", 0.8],
+            ["Ajustar ações para cada dispositivo", 0.78],
+            ["Como cadastrar nova armadilha?", 0.2],
+            ["Onde vejo histórico de alterações?", 0.15],
+            ["Quero restaurar padrões", 0.1],
+            ["Como faço para exportar?", 0.15],
+            ["Quais os status disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como gerar o QR Code?",
+        "comparar": [
+            ["Criação de códigos QR para CIP", 0.9],
+            ["Processo de geração de QR Code", 0.85],
+            ["Produzir identificador para armadilha", 0.82],
+            ["Configurar etiquetas digitais", 0.8],
+            ["Implementação de QR no monitoramento", 0.75],
+            ["Como imprimir etiquetas?", 0.2],
+            ["Onde vejo códigos existentes?", 0.15],
+            ["Quero reutilizar código", 0.1],
+            ["Como faço para testar?", 0.15],
+            ["Quais os padrões suportados?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Onde posso ver os dados coletados no aplicativo?",
+        "comparar": [
+            ["Acesso às informações do mobile", 0.88],
+            ["Visualizar registros do aplicativo", 0.85],
+            ["Consultar dados sincronizados", 0.82],
+            ["Monitorar informações coletadas", 0.8],
+            ["Relatórios de campo no sistema", 0.78],
+            ["Como exportar dados?", 0.2],
+            ["Onde vejo dados não sincronizados?", 0.15],
+            ["Quero filtrar por data", 0.1],
+            ["Como faço para corrigir?", 0.15],
+            ["Quais os formatos disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Onde posso adicionar armadilhas?",
+        "comparar": [
+            ["Cadastro de novas armadilhas CIP", 0.9],
+            ["Inserir dispositivos de monitoramento", 0.85],
+            ["Processo para incluir armadilhas", 0.82],
+            ["Adicionar pontos de controle", 0.8],
+            ["Implementação de novos dispositivos", 0.75],
+            ["Como editar armadilha existente?", 0.2],
+            ["Onde vejo armadilhas inativas?", 0.15],
+            ["Quero importar lista", 0.1],
+            ["Como faço para mapear?", 0.15],
+            ["Quais os tipos disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Onde posso ver a planta baixa?",
+        "comparar": [
+            ["Acesso ao mapa do ambiente", 0.88],
+            ["Visualização do layout do cliente", 0.85],
+            ["Consultar desenho técnico", 0.82],
+            ["Navegação pela planta cadastrada", 0.8],
+            ["Localização de armadilhas no mapa", 0.78],
+            ["Como cadastrar nova planta?", 0.2],
+            ["Onde vejo versões anteriores?", 0.15],
+            ["Quero editar planta", 0.1],
+            ["Como faço para exportar?", 0.15],
+            ["Quais os formatos suportados?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "O que é o controle do Almoxarifado?",
+        "comparar": [
+            ["Gestão de estoque operacional", 0.9],
+            ["Sistema de controle de insumos", 0.85],
+            ["Explicação sobre almoxarifado", 0.82],
+            ["Processo de movimentação de produtos", 0.8],
+            ["Fluxo de saída de materiais", 0.75],
+            ["Como cadastrar novo item?", 0.2],
+            ["Onde vejo estoque mínimo?", 0.15],
+            ["Quero gerar relatório", 0.1],
+            ["Como faço inventário?", 0.15],
+            ["Quais os tipos de movimentação?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Para que serve a tela Estoque por Operador?",
+        "comparar": [
+            ["Monitoramento de produtos por técnico", 0.88],
+            ["Controle individual de materiais", 0.85],
+            ["Rastreamento de insumos alocados", 0.82],
+            ["Gestão de estoque atribuído", 0.8],
+            ["Visão por colaborador", 0.78],
+            ["Como registrar devolução?", 0.2],
+            ["Onde vejo histórico completo?", 0.15],
+            ["Quero filtrar por período", 0.1],
+            ["Como faço para exportar?", 0.15],
+            ["Quais os status disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como faço a entrada de produtos que comprei?",
+        "comparar": [
+            ["Registro de compra no estoque", 0.9],
+            ["Processo para entrada de materiais", 0.85],
+            ["Adicionar novos itens ao almoxarifado", 0.82],
+            ["Cadastro de produtos adquiridos", 0.8],
+            ["Atualização de inventário", 0.75],
+            ["Como editar item existente?", 0.2],
+            ["Onde vejo notas fiscais?", 0.15],
+            ["Quero ajustar quantidade", 0.1],
+            ["Como faço para vincular NF?", 0.15],
+            ["Quais os campos obrigatórios?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Onde consigo verificar a movimentação do estoque em um determinado período?",
+        "comparar": [
+            ["Relatório histórico de estoque", 0.88],
+            ["Consulta de movimentações", 0.85],
+            ["Filtro temporal para transações", 0.82],
+            ["Monitoramento por período", 0.8],
+            ["Extrato de entradas e saídas", 0.78],
+            ["Como exportar relatório?", 0.2],
+            ["Onde vejo saldo atual?", 0.15],
+            ["Quero filtrar por produto", 0.1],
+            ["Como faço para gráficos?", 0.15],
+            ["Quais os filtros disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como o sistema registra as saídas do estoque?",
+        "comparar": [
+            ["Fluxo de baixa de materiais", 0.9],
+            ["Processo de consumo de produtos", 0.85],
+            ["Mecanismo de dedução automática", 0.82],
+            ["Controle de saída de insumos", 0.8],
+            ["Registro de utilização", 0.75],
+            ["Como reverter baixa?", 0.2],
+            ["Onde vejo saídas não autorizadas?", 0.15],
+            ["Quero ajustar quantidade", 0.1],
+            ["Como faço para registrar manualmente?", 0.15],
+            ["Quais os tipos de saída?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Onde se faz o lançamento das minhas notas fiscais, despesas da empresa?",
+        "comparar": [
+            ["Registro de documentos fiscais", 0.88],
+            ["Processo para cadastrar despesas", 0.85],
+            ["Área de contabilidade financeira", 0.82],
+            ["Módulo de gestão fiscal", 0.8],
+            ["Inserção de notas e custos", 0.78],
+            ["Como editar lançamento?", 0.2],
+            ["Onde vejo extrato completo?", 0.15],
+            ["Quero filtrar por período", 0.1],
+            ["Como faço para conciliar?", 0.15],
+            ["Quais os tipos de documento?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como excluir uma despesa que aparece no contas a pagar?",
+        "comparar": [
+            ["Remoção de registro financeiro", 0.9],
+            ["Cancelamento de despesa cadastrada", 0.85],
+            ["Processo para exclusão de pagamento", 0.82],
+            ["Como eliminar lançamento incorreto", 0.8],
+            ["Ajuste no fluxo de contas", 0.75],
+            ["Como estornar pagamento?", 0.2],
+            ["Onde vejo histórico de exclusões?", 0.15],
+            ["Quero reativar registro", 0.1],
+            ["Como faço backup financeiro?", 0.15],
+            ["Quais os efeitos da exclusão?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como lançar a folha de pagamento dos funcionários?",
+        "comparar": [
+            ["Processo de registro de folha", 0.88],
+            ["Cadastro de pagamento de pessoal", 0.85],
+            ["Inserção de verbas trabalhistas", 0.82],
+            ["Gestão de remuneração", 0.8],
+            ["Fluxo para pagamento de salários", 0.78],
+            ["Como editar lançamento?", 0.2],
+            ["Onde vejo folhas anteriores?", 0.15],
+            ["Quero filtrar por departamento", 0.1],
+            ["Como faço para exportar?", 0.15],
+            ["Quais os benefícios calculados?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Como lançar a compra dos produtos?",
+        "comparar": [
+            ["Registro de aquisição de insumos", 0.9],
+            ["Processo para compra no sistema", 0.85],
+            ["Cadastro de entrada de materiais", 0.82],
+            ["Fluxo completo de compras", 0.8],
+            ["Integração com estoque", 0.75],
+            ["Como editar pedido?", 0.2],
+            ["Onde vejo cotações?", 0.15],
+            ["Quero filtrar por fornecedor", 0.1],
+            ["Como faço para aprovar?", 0.15],
+            ["Quais os status disponíveis?", 0.1]
+        ]
+    },
+    {
+        "pergunta": "Não estou conseguindo alterar o mês do vencimento de uma despesa.",
+        "comparar": [
+            ["Problema na modificação de data", 0.88],
+            ["Restrição para alterar vencimento", 0.85],
+            ["Dificuldade para ajustar período", 0.82],
+            ["Como resolver bloqueio na edição", 0.8],
+            ["Solução para datas travadas", 0.78],
+            ["Como criar nova despesa?", 0.2],
+            ["Onde vejo regras financeiras?", 0.15],
+            ["Quero estornar lançamento", 0.1],
+            ["Como faço para reportar?", 0.15],
+            ["Quais as políticas do sistema?", 0.1]
+        ]
+    }
+]
