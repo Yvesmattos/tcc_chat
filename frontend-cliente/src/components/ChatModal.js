@@ -293,13 +293,6 @@ const ChatModal = () => {
   return (
     <div>
       <button className="chat-button" onClick={handleOpen}>
-        <img
-          src="/logo_iai.png"
-          alt="Logo"
-          className="logo-image"
-          width={40}
-          height={40}
-        />
         <span>IAtendente</span>
       </button>
       {open && (
