@@ -299,14 +299,6 @@ const ChatModal = () => {
         <div className="chat-modal">
           <div className="chat-modal-header">
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <img
-                src="/logo_iai.png"
-                alt="Logo"
-                className="logo-image"
-                width={60}
-                height={60}
-                style={{ margin: "auto" }}
-              />
               <h2 style={{ color: "white", fontWeight: "bold" }}>IAtendente</h2>
             </div>
             <div>
